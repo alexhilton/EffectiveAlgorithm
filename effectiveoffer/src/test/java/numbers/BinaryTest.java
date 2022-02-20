@@ -13,6 +13,7 @@ public class BinaryTest {
 
         assertEquals("1001", stringAddition("1000", "1"));
         assertEquals("10000", stringAddition("1111", "1"));
+        assertEquals("11110", stringAddition("1111", "1111"));
     }
 
     @Test
