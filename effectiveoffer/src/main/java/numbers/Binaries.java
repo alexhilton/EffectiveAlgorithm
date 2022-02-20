@@ -1,6 +1,21 @@
 package numbers;
 
 public class Binaries {
+    // Question #3
+    public static int[] countBits(int num) {
+        int[] result = new int[num + 1];
+        result[0] = 0; // 0 has no bits
+        for (int n = 1; n <= num; n++) {
+            int m = n;
+            while (m != 0) {
+                result[n]++;
+                m = m & (m - 1);
+            }
+        }
+
+        return result;
+    }
+
     // Question #2
     public static String stringAddition(String a, String b) {
         StringBuilder result = new StringBuilder();
