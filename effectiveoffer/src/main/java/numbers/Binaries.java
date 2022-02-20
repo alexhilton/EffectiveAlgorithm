@@ -1,6 +1,7 @@
 package numbers;
 
 public class Binaries {
+    // Question #2
     public static String stringAddition(String a, String b) {
         StringBuilder result = new StringBuilder();
         int i = a.length() - 1;
