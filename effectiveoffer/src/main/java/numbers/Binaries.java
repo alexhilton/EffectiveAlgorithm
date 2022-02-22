@@ -1,5 +1,6 @@
 package numbers;
 
+// Chapter 1, Section 2
 public class Binaries {
     // Question #3
     public static int[] countBits(int num) {
