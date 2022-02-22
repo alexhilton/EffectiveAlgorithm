@@ -2,6 +2,23 @@ package numbers;
 
 // Chapter 1, Section 2
 public class Binaries {
+    // Question #4
+    public static int singleNumber(int[] nums) {
+        int[] bitSums = new int[32];
+        for (int n : nums) {
+            for (int i = 0; i < 32; i++) {
+                bitSums[i] += (n >> (31 - i)) & 1;
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < 32; i++) {
+            result = (result << 1) + bitSums[i] % 3;
+        }
+
+        return result;
+    }
+
     // Question #3, solution #3
     public static int[] countBits3(int num) {
         int[] result = new int[num + 1];

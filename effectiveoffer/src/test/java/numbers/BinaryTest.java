@@ -51,4 +51,10 @@ public class BinaryTest {
         assertArrayEquals(new int[]{0, 1, 1, 2}, countBits3(3));
         assertArrayEquals(new int[]{0, 1, 1, 2, 1}, countBits3(4));
     }
+
+    @Test
+    public void testSingleNumber() {
+        assertEquals(6, singleNumber(new int[]{1, 1, 1, 6}));
+        assertEquals(100, singleNumber(new int[]{0, 1, 0, 1, 0, 1, 100}));
+    }
 }
