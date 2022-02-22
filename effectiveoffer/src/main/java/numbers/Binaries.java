@@ -2,6 +2,57 @@ package numbers;
 
 // Chapter 1, Section 2
 public class Binaries {
+    // Question #5 solution 2
+    public static int maxProduct2(String[] words) {
+        int[] flags = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            for (char ch : words[i].toCharArray()) {
+                flags[i] |= 1 << (ch - 'a');
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < words.length; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if ((flags[i] & flags[j]) == 0) {
+                    int prod = words[i].length() * words[j].length();
+                    result = Math.max(result, prod);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    // Question #5
+    public static int maxProduct(String[] words) {
+        boolean[][] flags = new boolean[words.length][26];
+        for (int i = 0; i < words.length; i++) {
+            for (char ch : words[i].toCharArray()) {
+                flags[i][ch - 'a'] = true;
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < words.length; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                int k = 0;
+                for (; k < 26; k++) {
+                    if (flags[i][k] && flags[j][k]) {
+                        break;
+                    }
+                }
+
+                if (k == 26) {
+                    int prod = words[i].length() * words[j].length();
+                    result = Math.max(result, prod);
+                }
+            }
+        }
+
+        return result;
+    }
+
     // Question #4
     public static int singleNumber(int[] nums) {
         int[] bitSums = new int[32];

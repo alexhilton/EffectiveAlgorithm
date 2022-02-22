@@ -57,4 +57,18 @@ public class BinaryTest {
         assertEquals(6, singleNumber(new int[]{1, 1, 1, 6}));
         assertEquals(100, singleNumber(new int[]{0, 1, 0, 1, 0, 1, 100}));
     }
+
+    @Test
+    public void testMaxProduct() {
+        assertEquals(0, maxProduct(new String[]{"ab", "bar", "aar", "far"}));
+        assertEquals(25, maxProduct(new String[]{"abcde", "fghij"}));
+        assertEquals(16, maxProduct(new String[]{"abcw", "foo", "bar", "fxyz", "abcdef"}));
+    }
+
+    @Test
+    public void testMaxProduct2() {
+        assertEquals(0, maxProduct2(new String[]{"ab", "bar", "aar", "far"}));
+        assertEquals(25, maxProduct2(new String[]{"abcde", "fghij"}));
+        assertEquals(16, maxProduct2(new String[]{"abcw", "foo", "bar", "fxyz", "abcdef"}));
+    }
 }
