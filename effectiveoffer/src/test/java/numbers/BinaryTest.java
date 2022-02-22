@@ -2,8 +2,7 @@ package numbers;
 
 import org.junit.jupiter.api.Test;
 
-import static numbers.Binaries.countBits;
-import static numbers.Binaries.stringAddition;
+import static numbers.Binaries.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,5 +32,23 @@ public class BinaryTest {
         assertArrayEquals(new int[]{0, 1, 1}, countBits(2));
         assertArrayEquals(new int[]{0, 1, 1, 2}, countBits(3));
         assertArrayEquals(new int[]{0, 1, 1, 2, 1}, countBits(4));
+    }
+
+    @Test
+    public void testCountBits2() {
+        assertArrayEquals(new int[]{0}, countBits2(0));
+        assertArrayEquals(new int[]{0, 1}, countBits2(1));
+        assertArrayEquals(new int[]{0, 1, 1}, countBits2(2));
+        assertArrayEquals(new int[]{0, 1, 1, 2}, countBits2(3));
+        assertArrayEquals(new int[]{0, 1, 1, 2, 1}, countBits2(4));
+    }
+
+    @Test
+    public void testCountBits3() {
+        assertArrayEquals(new int[]{0}, countBits3(0));
+        assertArrayEquals(new int[]{0, 1}, countBits3(1));
+        assertArrayEquals(new int[]{0, 1, 1}, countBits3(2));
+        assertArrayEquals(new int[]{0, 1, 1, 2}, countBits3(3));
+        assertArrayEquals(new int[]{0, 1, 1, 2, 1}, countBits3(4));
     }
 }

@@ -2,6 +2,30 @@ package numbers;
 
 // Chapter 1, Section 2
 public class Binaries {
+    // Question #3, solution #3
+    public static int[] countBits3(int num) {
+        int[] result = new int[num + 1];
+        result[0] = 0; // Make this obvious
+        for (int i = 1; i <= num; i++) {
+            // when i = 1, i >> 1 is 0, it is safe.
+            result[i] = result[i >> 1] + (i & 1);
+        }
+
+        return result;
+    }
+
+    // Question #3, solution #2
+    public static int[] countBits2(int num) {
+        int[] result = new int[num + 1];
+        result[0] = 0; // Make this obvious.
+        for (int i = 1; i <= num; i++) {
+            // when i = 1, i&(i-1) is 0, so it is safe.
+            result[i] = result[i & (i - 1)] + 1;
+        }
+
+        return result;
+    }
+
     // Question #3
     public static int[] countBits(int num) {
         int[] result = new int[num + 1];
