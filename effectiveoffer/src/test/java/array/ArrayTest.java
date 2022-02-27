@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static array.ArrayQuestions.threeSum;
-import static array.ArrayQuestions.twoSum;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static array.ArrayQuestions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayTest {
     @Test
@@ -28,5 +26,12 @@ public class ArrayTest {
         );
         assertIterableEquals(Arrays.asList(Arrays.asList(-1, -1, 2), Arrays.asList(-1, 0, 1)),
                 threeSum(new int[] {-1, 0, 1, 2, -1, -4}));
+    }
+
+    @Test
+    public void testMinSubArray() {
+        assertEquals(1, minSubArrayLen(0, new int[] {0}));
+        assertEquals(0, minSubArrayLen(1, new int[] {0}));
+        assertEquals(2, minSubArrayLen(7, new int[] {5, 1, 4, 3}));
     }
 }
