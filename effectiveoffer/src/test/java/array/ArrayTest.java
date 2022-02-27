@@ -34,4 +34,13 @@ public class ArrayTest {
         assertEquals(0, minSubArrayLen(1, new int[] {0}));
         assertEquals(2, minSubArrayLen(7, new int[] {5, 1, 4, 3}));
     }
+
+    @Test
+    public void testSubArrayProduct() {
+        assertEquals(1, numSubarrayProductLessThanK(new int[] {1}, 2));
+        assertEquals(0, numSubarrayProductLessThanK(new int[] {1}, 1));
+        assertEquals(1, numSubarrayProductLessThanK(new int[] {1, 2}, 2));
+        assertEquals(3, numSubarrayProductLessThanK(new int[] {1, 2}, 3));
+        assertEquals(8, numSubarrayProductLessThanK(new int[] {10, 5, 2, 6}, 100));
+    }
 }

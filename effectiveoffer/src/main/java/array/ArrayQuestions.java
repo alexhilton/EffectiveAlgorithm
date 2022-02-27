@@ -1,10 +1,28 @@
 package array;
 
+import sun.java2d.Disposer;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ArrayQuestions {
+    // Question 9
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+        long product = 1;
+        int left = 0;
+        int count = 0;
+        for (int right = 0; right < nums.length; right++) {
+            product *= nums[right];
+            while (left <= right && product >= k) {
+                product /= nums[left++];
+            }
+
+            count += right >= left ? right - left + 1 : 0;
+        }
+        return count;
+    }
+
     // Question 8
     public static int minSubArrayLen(int k, int[] nums) {
         int left = 0;
