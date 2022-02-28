@@ -1,12 +1,22 @@
 package array;
 
-import sun.java2d.Disposer;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ArrayQuestions {
+    // Question 10
+    public static int subArraySum(int[] nums, int k) {
+        Map<Integer, Integer> sumToCount = new HashMap<>();
+        sumToCount.put(0, 1);
+        int sum = 0;
+        int count = 0;
+        for (int n : nums) {
+            sum += n;
+            count += sumToCount.getOrDefault(sum - k, 0);
+            sumToCount.put(sum, sumToCount.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
     // Question 9
     public static int numSubarrayProductLessThanK(int[] nums, int k) {
         long product = 1;

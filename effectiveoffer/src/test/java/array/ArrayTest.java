@@ -43,4 +43,13 @@ public class ArrayTest {
         assertEquals(3, numSubarrayProductLessThanK(new int[] {1, 2}, 3));
         assertEquals(8, numSubarrayProductLessThanK(new int[] {10, 5, 2, 6}, 100));
     }
+
+    @Test
+    public void testSubArraySum() {
+        assertEquals(1, subArraySum(new int[] {0}, 0));
+        assertEquals(0, subArraySum(new int[] {0}, 1));
+        assertEquals(2, subArraySum(new int[] {1, 1, 1}, 2));
+        assertEquals(0, subArraySum(new int[] {1, 2, 3}, 4));
+        assertEquals(1, subArraySum(new int[] {1, 2, 3}, 5));
+    }
 }
