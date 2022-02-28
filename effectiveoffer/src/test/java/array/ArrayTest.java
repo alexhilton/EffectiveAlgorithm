@@ -73,4 +73,15 @@ public class ArrayTest {
         assertEquals(3, pivotIndex(new int[] {1, 7, 3, 6, 2, 9}));
         assertEquals(2, pivotIndex(new int[] {-1, 1, 0, -1, 1, 0, -1, 1}));
     }
+
+    @Test
+    public void testSumRegion() {
+        int[][] a0 = {{0}};
+        prepareSums(a0);
+        assertEquals(0, sumRegion(0, 0, 0, 0));
+        int[][] a = {{3, 0, 1, 4, 2}, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}};
+        prepareSums(a);
+        assertEquals(3, sumRegion(0, 0, 0, 0));
+        assertEquals(8, sumRegion(2, 1, 4, 3));
+    }
 }
