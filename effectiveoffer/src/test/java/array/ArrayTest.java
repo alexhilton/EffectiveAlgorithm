@@ -52,4 +52,15 @@ public class ArrayTest {
         assertEquals(0, subArraySum(new int[] {1, 2, 3}, 4));
         assertEquals(1, subArraySum(new int[] {1, 2, 3}, 5));
     }
+
+    @Test
+    public void testFindMaxLength() {
+        assertEquals(0, findMaxLength(new int[] {0}));
+        assertEquals(0, findMaxLength(new int[] {1}));
+        assertEquals(2, findMaxLength(new int[] {0, 1}));
+        assertEquals(2, findMaxLength(new int[] {0, 1, 1}));
+        assertEquals(2, findMaxLength(new int[] {0, 1, 0}));
+        assertEquals(4, findMaxLength(new int[] {0, 1, 1, 0}));
+        assertEquals(6, findMaxLength(new int[] {0, 1, 1, 0, 1, 0, 0}));
+    }
 }

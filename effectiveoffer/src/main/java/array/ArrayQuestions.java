@@ -3,6 +3,24 @@ package array;
 import java.util.*;
 
 public class ArrayQuestions {
+    // Question 11
+    public static int findMaxLength(int[] nums) {
+        Map<Integer, Integer> sumToIndex = new HashMap<>();
+        sumToIndex.put(0, -1);
+        int sum = 0;
+        int maxLength = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i] == 0 ? -1 : 1;
+            if (sumToIndex.containsKey(sum)) {
+                maxLength = Math.max(maxLength, i - sumToIndex.get(sum));
+            } else {
+                sumToIndex.put(sum, i);
+            }
+        }
+
+        return maxLength;
+    }
+
     // Question 10
     public static int subArraySum(int[] nums, int k) {
         Map<Integer, Integer> sumToCount = new HashMap<>();
