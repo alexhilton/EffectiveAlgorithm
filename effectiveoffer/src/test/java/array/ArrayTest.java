@@ -37,11 +37,11 @@ public class ArrayTest {
 
     @Test
     public void testSubArrayProduct() {
-        assertEquals(1, numSubarrayProductLessThanK(new int[] {1}, 2));
-        assertEquals(0, numSubarrayProductLessThanK(new int[] {1}, 1));
-        assertEquals(1, numSubarrayProductLessThanK(new int[] {1, 2}, 2));
-        assertEquals(3, numSubarrayProductLessThanK(new int[] {1, 2}, 3));
-        assertEquals(8, numSubarrayProductLessThanK(new int[] {10, 5, 2, 6}, 100));
+        assertEquals(1, numSubArrayProductLessThanK(new int[] {1}, 2));
+        assertEquals(0, numSubArrayProductLessThanK(new int[] {1}, 1));
+        assertEquals(1, numSubArrayProductLessThanK(new int[] {1, 2}, 2));
+        assertEquals(3, numSubArrayProductLessThanK(new int[] {1, 2}, 3));
+        assertEquals(8, numSubArrayProductLessThanK(new int[] {10, 5, 2, 6}, 100));
     }
 
     @Test

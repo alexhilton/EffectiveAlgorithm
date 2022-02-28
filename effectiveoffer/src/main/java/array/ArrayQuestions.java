@@ -18,7 +18,7 @@ public class ArrayQuestions {
     }
 
     // Question 9
-    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+    public static int numSubArrayProductLessThanK(int[] nums, int k) {
         long product = 1;
         int left = 0;
         int count = 0;
