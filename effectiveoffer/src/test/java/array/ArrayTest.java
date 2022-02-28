@@ -63,4 +63,14 @@ public class ArrayTest {
         assertEquals(4, findMaxLength(new int[] {0, 1, 1, 0}));
         assertEquals(6, findMaxLength(new int[] {0, 1, 1, 0, 1, 0, 0}));
     }
+
+    @Test
+    public void testPivotIndex() {
+        assertEquals(-1, pivotIndex(new int[] {}));
+        assertEquals(0, pivotIndex(new int[] {0}));
+        assertEquals(0, pivotIndex(new int[] {1}));
+        assertEquals(1, pivotIndex(new int[] {0, 1, 0}));
+        assertEquals(3, pivotIndex(new int[] {1, 7, 3, 6, 2, 9}));
+        assertEquals(2, pivotIndex(new int[] {-1, 1, 0, -1, 1, 0, -1, 1}));
+    }
 }

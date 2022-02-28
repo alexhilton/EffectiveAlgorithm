@@ -1,8 +1,27 @@
 package array;
 
+import sun.util.resources.cldr.to.CalendarData_to_TO;
+
 import java.util.*;
 
 public class ArrayQuestions {
+    // Question 12
+    public static int pivotIndex(int[] nums) {
+        int total = 0;
+        for (int n : nums) {
+            total += n;
+        }
+
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (sum - nums[i] == total - sum) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // Question 11
     public static int findMaxLength(int[] nums) {
         Map<Integer, Integer> sumToIndex = new HashMap<>();
