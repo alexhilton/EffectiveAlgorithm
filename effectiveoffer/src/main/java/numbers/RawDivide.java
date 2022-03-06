@@ -1,5 +1,7 @@
 package numbers;
 
+import java.awt.geom.Dimension2D;
+
 // Chapter 1, Section 1
 public class RawDivide {
     // Question #1
@@ -42,5 +44,29 @@ public class RawDivide {
         }
 
         return result;
+    }
+
+    // Bruteforce version
+    public static int divideBruteforce(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+
+        int sign = 0;
+        if (dividend > 0) {
+            sign++;
+            dividend = -dividend;
+        }
+        if (divisor > 0) {
+            sign++;
+            divisor = -divisor;
+        }
+        int result = 0;
+        while (dividend <= divisor) {
+            result++;
+            dividend -= divisor;
+        }
+
+        return sign == 1 ? -result : result;
     }
 }
