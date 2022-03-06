@@ -1,7 +1,5 @@
 package numbers;
 
-import java.awt.geom.Dimension2D;
-
 // Chapter 1, Section 1
 public class RawDivide {
     // Question #1
