@@ -1,5 +1,7 @@
 package numbers;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 // Chapter 1, Section 1
 public class RawDivide {
     // Question #1
@@ -66,6 +68,25 @@ public class RawDivide {
         }
 
         return sign == 1 ? -result : result;
+    }
+
+    // Only for positive numbers
+    // To understand the core algorithm
+    public static int dividePositives(int dividend, int divisor) {
+        int result = 0;
+        while (dividend >= divisor) {
+            int value = divisor;
+            int quotient = 1;
+            while (value <= 0x3fffffff && dividend >= value + value) {
+                quotient += quotient;
+                value += value;
+            }
+
+            result += quotient;
+            dividend -= value;
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
