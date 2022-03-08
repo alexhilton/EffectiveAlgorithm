@@ -67,4 +67,16 @@ public class RawDivide {
 
         return sign == 1 ? -result : result;
     }
+
+    public static void main(String[] args) {
+        // Learn the basics of the Integer.
+        System.out.println(String.format("Max byte %d, 0x%X, half 0x%X", Byte.MAX_VALUE, Byte.MAX_VALUE, Byte.MAX_VALUE/2));
+        System.out.println(String.format("Min byte %d, 0x%X, half 0x%X", Byte.MIN_VALUE, Byte.MIN_VALUE, (byte)(Byte.MIN_VALUE/2)));
+        System.out.println(String.format("Max short %d, 0x%X, half 0x%X", Short.MAX_VALUE, Short.MAX_VALUE, Short.MAX_VALUE/2));
+        System.out.println(String.format("Min short %d, 0x%X, half 0x%X", Short.MIN_VALUE, Short.MIN_VALUE, (short) (Short.MIN_VALUE/2)));
+        System.out.println(String.format("Max Int %d, 0x%X, half 0x%X", Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE/2));
+        System.out.println(String.format("Min Int %d, 0x%X, half 0x%X", Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE/2));
+        System.out.println(String.format("Literal %d, 0x%X", 0xffffffff, 0xffffffff));
+        System.out.println(String.format("Max in %d (0x%X) + 1 = %d (0x%X)", Integer.MAX_VALUE, Integer.MAX_VALUE, (Integer.MAX_VALUE+1), (Integer.MAX_VALUE+1)));
+    }
 }
