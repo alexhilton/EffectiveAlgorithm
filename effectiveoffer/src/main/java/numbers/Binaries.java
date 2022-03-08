@@ -109,6 +109,24 @@ public class Binaries {
         return result;
     }
 
+    // Question #3
+    // Bruteforce version. O(n*32)
+    public static int[] countBitsBruteforce(int num) {
+        int[] result = new int[num + 1];
+        result[0] = 0;
+        for (int n = 1; n <= num; n++) {
+            int m = n;
+            while (m != 0) {
+                if ((m & 0x01) != 0) {
+                    result[n]++;
+                }
+                m = m >> 1;
+            }
+        }
+
+        return result;
+    }
+
     // Question #2
     public static String stringAddition(String a, String b) {
         StringBuilder result = new StringBuilder();
