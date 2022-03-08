@@ -76,7 +76,11 @@ public class RawDivide {
         System.out.println(String.format("Min short %d, 0x%X, half 0x%X", Short.MIN_VALUE, Short.MIN_VALUE, (short) (Short.MIN_VALUE/2)));
         System.out.println(String.format("Max Int %d, 0x%X, half 0x%X", Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE/2));
         System.out.println(String.format("Min Int %d, 0x%X, half 0x%X", Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE/2));
+
         System.out.println(String.format("Literal %d, 0x%X", 0xffffffff, 0xffffffff));
+
         System.out.println(String.format("Max in %d (0x%X) + 1 = %d (0x%X)", Integer.MAX_VALUE, Integer.MAX_VALUE, (Integer.MAX_VALUE+1), (Integer.MAX_VALUE+1)));
+
+        System.out.println(String.format("Min in %d (0x%X) - 1 = %d (0x%X)", Integer.MIN_VALUE, Integer.MIN_VALUE, (Integer.MIN_VALUE-1), (Integer.MIN_VALUE-1)));
     }
 }
