@@ -156,4 +156,18 @@ public class ArrayQuestions {
 
         return new int[] {i, j};
     }
+
+    // Bruteforce, O(n^2)
+    public static int[] twoSumBruteforce(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[] {i, j};
+                }
+            }
+        }
+
+        // Should not happen
+        return new int[] {};
+    }
 }
