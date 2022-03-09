@@ -170,4 +170,25 @@ public class ArrayQuestions {
         // Should not happen
         return new int[] {};
     }
+
+    // Bruteforce with binary search
+    // O(n*logn)
+    public static int[] twoSumBinarySearch(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            int j = i + 1;
+            int k = nums.length;
+            while (j < k) {
+                int mid = (j + k) / 2;
+                if (nums[i] + nums[mid] == target) {
+                    return new int[] {i, mid};
+                } else if (nums[i] + nums[mid] > target) {
+                    k = mid - 1;
+                } else {
+                    j = mid + 1;
+                }
+            }
+        }
+
+        return new int[] {}; // Should not happen
+    }
 }
