@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArrayTest {
     @Test
     public void testTwoSum() {
-        assertArrayEquals(new int[] {0, 1}, twoSumBinarySearch(new int[] {1, 2}, 3));
-        assertArrayEquals(new int[] {1, 3}, twoSumBinarySearch(new int[] {1, 2, 4, 6, 10}, 8));
-        assertArrayEquals(new int[] {0, 3}, twoSumBinarySearch(new int[] {1, 2, 4, 6, 10}, 7));
+        assertArrayEquals(new int[] {0, 1}, twosumHash(new int[] {1, 2}, 3));
+        assertArrayEquals(new int[] {1, 3}, twosumHash(new int[] {1, 2, 4, 6, 10}, 8));
+        assertArrayEquals(new int[] {0, 3}, twosumHash(new int[] {1, 2, 4, 6, 10}, 7));
     }
 
     @Test

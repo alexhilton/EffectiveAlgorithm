@@ -191,4 +191,20 @@ public class ArrayQuestions {
 
         return new int[] {}; // Should not happen
     }
+
+    // HashMap version
+    // Generally O(n)
+    public static int[] twosumHash(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+        for (int n : nums) {
+            if (map.containsKey((target - n))) {
+                return new int[] {map.get(n), map.get(target - n)};
+            }
+        }
+
+        return new int[] {};
+    }
 }
