@@ -1,5 +1,9 @@
 package numbers;
 
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 // Chapter 1, Section 2
 public class Binaries {
     // Question #5 solution 2
@@ -68,6 +72,27 @@ public class Binaries {
         }
 
         return result;
+    }
+
+    // Question #4
+    // Bruteforce version of single number
+    // Hash has best O(1) worst O(n^2)
+    // So it is generally O(n)
+    public static int singleNumberBruteforce(int[] nums) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+        for (int n : nums) {
+            int count = countMap.getOrDefault(n, 0);
+            countMap.put(n, count + 1);
+        }
+        for (int n : nums) {
+            int count = countMap.get(n);
+            if (count == 1) {
+                return n;
+            }
+        }
+
+        // Should not happen
+        return 0;
     }
 
     // Question #3, solution #3
