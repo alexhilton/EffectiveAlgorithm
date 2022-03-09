@@ -1,7 +1,6 @@
 package numbers;
 
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Map;
 
 // Chapter 1, Section 2
@@ -58,6 +57,7 @@ public class Binaries {
     }
 
     // Question #4
+    // O(32*n)
     public static int singleNumber(int[] nums) {
         int[] bitSums = new int[32];
         for (int n : nums) {
@@ -68,6 +68,7 @@ public class Binaries {
 
         int result = 0;
         for (int i = 0; i < 32; i++) {
+            // remainder is 1 or 0
             result = (result << 1) + bitSums[i] % 3;
         }
 
