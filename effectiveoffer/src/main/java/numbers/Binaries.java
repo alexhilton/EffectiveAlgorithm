@@ -71,11 +71,13 @@ public class Binaries {
     }
 
     // Question #3, solution #3
+    // O(n)
     public static int[] countBits3(int num) {
         int[] result = new int[num + 1];
         result[0] = 0; // Make this obvious
         for (int i = 1; i <= num; i++) {
             // when i = 1, i >> 1 is 0, it is safe.
+            // real O(1)
             result[i] = result[i >> 1] + (i & 1);
         }
 
@@ -83,11 +85,13 @@ public class Binaries {
     }
 
     // Question #3, solution #2
+    // O(n)
     public static int[] countBits2(int num) {
         int[] result = new int[num + 1];
         result[0] = 0; // Make this obvious.
         for (int i = 1; i <= num; i++) {
             // when i = 1, i&(i-1) is 0, so it is safe.
+            // real O(1)
             result[i] = result[i & (i - 1)] + 1;
         }
 
@@ -95,11 +99,13 @@ public class Binaries {
     }
 
     // Question #3
+    // O(kn)
     public static int[] countBits(int num) {
         int[] result = new int[num + 1];
         result[0] = 0; // 0 has no bits
         for (int n = 1; n <= num; n++) {
             int m = n;
+            // O(k), worst is O(32)
             while (m != 0) {
                 result[n]++;
                 m = m & (m - 1);
@@ -116,6 +122,7 @@ public class Binaries {
         result[0] = 0;
         for (int n = 1; n <= num; n++) {
             int m = n;
+            // O(32) for integer, because you must move 32 times
             while (m != 0) {
                 if ((m & 0x01) != 0) {
                     result[n]++;
