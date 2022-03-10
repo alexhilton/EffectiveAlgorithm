@@ -113,6 +113,10 @@ public class ArrayQuestions {
             int i = 0;
             while (i < nums.length - 2) {
                 twoSumTuple(nums, i, result);
+                // twoSum will return same tuple for all numbers equal to nums[i]
+                // so skip all same values.
+                // If not found, means nums[i] never be a tuple, also need to skip
+                // all same values.
                 int temp = nums[i];
                 while (i < nums.length && nums[i] == temp) {
                     i++;
@@ -130,6 +134,9 @@ public class ArrayQuestions {
             if (nums[i] + nums[j] + nums[k] == 0) {
                 result.add(Arrays.asList(nums[i], nums[j], nums[k]));
 
+                // Found nums[j] and nums[k], all same nums[j] will return the same nums[k]
+                // so need to skip same nums[j]
+                // can skip all nums[k], of course.
                 int temp = nums[j];
                 while (nums[j] == temp && j < k) {
                     j++;
