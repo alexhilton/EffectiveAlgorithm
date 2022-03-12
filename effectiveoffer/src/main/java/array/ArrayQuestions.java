@@ -89,14 +89,30 @@ public class ArrayQuestions {
     }
 
     // Question 8
+    // O(n)
+    // Best case is O(n): K is always bigger than sum, never into inner loop, result is 0.
+    // Worst case is O(n+n): sum of [0, length-2] less than K, but last element bigger than K
+    // left is still 0, when right is at end of array, must iterate left to end of array, too.
     public static int minSubArrayLen(int k, int[] nums) {
         int left = 0;
         int sum = 0;
         int minLength = Integer.MAX_VALUE;
+        // To find min sub length, must iterate whole loop
+        // So the end condition of loop invariant is when
+        // right reach end of the array.
         for (int right = 0; right < nums.length; right++) {
+            // sum holding the sum of [left, right]
+            // move right to make sum bigger
             sum += nums[right];
+            // move left to make sum smaller
+            // Always move left when possible, even loop N times, but the total loop of left is from 0 to N-1
+            // Which is the worst case.
+            // no overlap of the two loops, which is the essence of this algorithm.
             while (left <= right && sum >= k) {
                 minLength = Math.min(minLength, right - left + 1);
+                // when move left, kick the elements out of sum, the sum will be the sum of [left, right]
+                // no need to calculate again.
+                // This is another trick of this algorithm.
                 sum -= nums[left++];
             }
         }

@@ -34,6 +34,7 @@ public class ArrayTest {
         assertEquals(1, minSubArrayLen(0, new int[] {0}));
         assertEquals(0, minSubArrayLen(1, new int[] {0}));
         assertEquals(2, minSubArrayLen(7, new int[] {5, 1, 4, 3}));
+        assertEquals(1, minSubArrayLen(100, new int[] {1, 2, 3, 4, 5, 6, 101}));
     }
 
     @Test
