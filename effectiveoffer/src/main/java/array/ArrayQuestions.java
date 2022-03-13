@@ -61,6 +61,9 @@ public class ArrayQuestions {
     // Question 10
     public static int subArraySum(int[] nums, int k) {
         Map<Integer, Integer> sumToCount = new HashMap<>();
+        // When {k}, k, loop iterate once, count would be 0 (default 0 for (k-k),
+        // but the right answer is 1
+        // So, to make it right, need to set count to 1 to avoid default 0.
         sumToCount.put(0, 1);
         int sum = 0;
         int count = 0;
@@ -69,6 +72,24 @@ public class ArrayQuestions {
             count += sumToCount.getOrDefault(sum - k, 0);
             sumToCount.put(sum, sumToCount.getOrDefault(sum, 0) + 1);
         }
+        return count;
+    }
+
+    // Question 10
+    // Bruteforce, O(n^2)
+    public static int subArraySumBruteforce(int[] nums, int k) {
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                // [i, j] is the sub array.
+                sum += nums[j];
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+
         return count;
     }
 

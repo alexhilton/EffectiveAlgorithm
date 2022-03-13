@@ -51,8 +51,12 @@ public class ArrayTest {
         assertEquals(1, subArraySum(new int[] {0}, 0));
         assertEquals(0, subArraySum(new int[] {0}, 1));
         assertEquals(2, subArraySum(new int[] {1, 1, 1}, 2));
+        assertEquals(1, subArraySum(new int[] {1, 1}, 2));
+        assertEquals(2, subArraySum(new int[] {1, 1}, 1));
+        assertEquals(6, subArraySum(new int[] {0, 0, 0}, 0));
         assertEquals(0, subArraySum(new int[] {1, 2, 3}, 4));
-        assertEquals(1, subArraySum(new int[] {1, 2, 3}, 5));
+        assertEquals(1, subArraySum(new int[] {1, 2, 3}, 5));;
+        assertEquals(28, subArraySum(new int[] {1, 0, 0, 0, 0, 0, 0, 0, 2}, 0));
     }
 
     @Test
