@@ -73,6 +73,7 @@ public class ArrayQuestions {
     }
 
     // Question 9
+    // Same to Question 8, only difference is product other than sum.
     public static int numSubArrayProductLessThanK(int[] nums, int k) {
         long product = 1;
         int left = 0;
