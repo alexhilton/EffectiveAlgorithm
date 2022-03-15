@@ -24,6 +24,7 @@ public class ArrayQuestions {
     }
 
     // Question 12
+    // O(n+n)
     public static int pivotIndex(int[] nums) {
         int total = 0;
         for (int n : nums) {
@@ -33,6 +34,9 @@ public class ArrayQuestions {
         int sum = 0;
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
+            // left sub array is [0, i-1]
+            // right sub array is [i+1, n]
+            // so, sum of left sub array is sum-[i], sum of right subarray is total-sum
             if (sum - nums[i] == total - sum) {
                 return i;
             }

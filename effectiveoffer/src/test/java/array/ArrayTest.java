@@ -78,6 +78,7 @@ public class ArrayTest {
         assertEquals(1, pivotIndex(new int[] {0, 1, 0}));
         assertEquals(3, pivotIndex(new int[] {1, 7, 3, 6, 2, 9}));
         assertEquals(2, pivotIndex(new int[] {-1, 1, 0, -1, 1, 0, -1, 1}));
+        assertEquals(-1, pivotIndex(new int[] {1, 1, -1, -2, -3, 5, 100}));
     }
 
     @Test
