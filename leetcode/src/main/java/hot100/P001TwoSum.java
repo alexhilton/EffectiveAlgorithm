@@ -37,4 +37,47 @@ public class P001TwoSum {
 
         return result;
     }
+
+    // Quadruple
+    // Use binary search for both loops.
+    public static int[] quadruple(int[] nums, int target) {
+        int[] result = {0, 1};
+        if (nums.length <= 2) {
+            return result;
+        }
+
+        for (int i = 0, j = nums.length - 1; i < j; i++, j--) {
+            if (nums[i] + nums[j] == target) {
+                // Lucky
+                result[0] = i;
+                result[1] = j;
+                return result;
+            }
+
+            // should be in [i+1, j-1], find them with double pointers.
+            int x = target - nums[i];
+            int y = target - nums[j];
+            for (int k = i + 1, m = j - 1; k <= m; k++, m--) {
+                result[0] = i;
+                if (nums[k] == x) {
+                    result[1] = k;
+                    return result;
+                } else if (nums[m] == x) {
+                    result[1] = m;
+                    return result;
+                }
+
+                result[1] = j;
+                if (nums[k] == y) {
+                    result[0] = k;
+                    return result;
+                } else if (nums[m] == y) {
+                    result[0] = m;
+                    return result;
+                }
+            }
+        }
+
+        return result;
+    }
 }

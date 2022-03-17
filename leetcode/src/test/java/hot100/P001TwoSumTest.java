@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public class P001TwoSumTest {
     @Test
     public void testTwoSum() {
-        BiFunction<int[], Integer, int[]> action = P001TwoSum::betterBruteForce;
+        BiFunction<int[], Integer, int[]> action = P001TwoSum::quadruple;
 
         assertArrayEquals(new int[] {0, 1}, action.apply(new int[] {3, 3}, 6));
         assertArrayEquals(new int[] {1, 2}, action.apply(new int[] {3, 2, 4}, 6));
