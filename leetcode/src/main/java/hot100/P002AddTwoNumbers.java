@@ -11,8 +11,8 @@ public class P002AddTwoNumbers {
         ListNode pr = result;
         int carry = 0;
 
-        while (p1 != null && p2 != null) {
-            int sum = p1.val + p2.val + carry;
+        while (p1 != null || p2 != null) {
+            int sum = (p1 == null ? 0 : p1.val) + (p2 == null ? 0 : p2.val) + carry;
             if (sum >= 10) {
                 carry = 1;
                 sum -= 10;
@@ -27,43 +27,15 @@ public class P002AddTwoNumbers {
                 pr.next = node;
             }
             pr = node;
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-
-        // L1 is longer than L2
-        while (p1 != null) {
-            int sum = p1.val + carry;
-            if (sum >= 10) {
-                carry = 1;
-                sum -= 10;
-            } else {
-                carry = 0;
-            }
-            ListNode node = new ListNode(sum);
-            pr.next = node;
-            pr = node;
-            p1 = p1.next;
-        }
-
-        while (p2 != null) {
-            int sum = p2.val + carry;
-            if (sum >= 10) {
-                carry = 1;
-                sum -= 10;
-            } else {
-                carry = 0;
-            }
-            ListNode node = new ListNode(sum);
-            pr.next = node;
-            pr = node;
-            p2 = p2.next;
+            p1 = p1 == null ? null : p1.next;
+            p2 = p2 == null ? null : p2.next;
         }
 
         if (carry > 0) {
             ListNode node = new ListNode(carry);
             pr.next = node;
         }
+
         return result;
     }
 }
