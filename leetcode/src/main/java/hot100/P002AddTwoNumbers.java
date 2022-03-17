@@ -5,6 +5,65 @@ import datastructure.ListNode;
 // https://leetcode-cn.com/problems/add-two-numbers/
 public class P002AddTwoNumbers {
     public static ListNode iterateList(ListNode l1, ListNode l2) {
-        return new ListNode(0);
+        ListNode result = null;
+        ListNode p1 = l1;
+        ListNode p2 = l2;
+        ListNode pr = result;
+        int carry = 0;
+
+        while (p1 != null && p2 != null) {
+            int sum = p1.val + p2.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            ListNode node = new ListNode(sum);
+            if (result == null) {
+                result = node;
+            }
+            if (pr != null) {
+                pr.next = node;
+            }
+            pr = node;
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        // L1 is longer than L2
+        while (p1 != null) {
+            int sum = p1.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            ListNode node = new ListNode(sum);
+            pr.next = node;
+            pr = node;
+            p1 = p1.next;
+        }
+
+        while (p2 != null) {
+            int sum = p2.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            ListNode node = new ListNode(sum);
+            pr.next = node;
+            pr = node;
+            p2 = p2.next;
+        }
+
+        if (carry > 0) {
+            ListNode node = new ListNode(carry);
+            pr.next = node;
+        }
+        return result;
     }
 }
