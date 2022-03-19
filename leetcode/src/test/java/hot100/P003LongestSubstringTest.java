@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class P003LongestSubstringTest {
     @Test
     public void testLongestSubstring() {
-        Function<String, Integer> action = P003LongestSubstring::bruteForce;
+        Function<String, Integer> action = P003LongestSubstring::doublePointer;
         assertEquals(0, action.apply(""));
         assertEquals(1, action.apply("a"));
         assertEquals(2, action.apply("ab"));

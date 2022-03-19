@@ -32,4 +32,37 @@ public class P003LongestSubstring {
         }
         return result;
     }
+
+    public static int doublePointer(String s) {
+        int result = 0;
+        if (s == null || s == "") {
+            return result;
+        }
+        Map<Character, Integer> substring = new HashMap<>();
+        int i = 0;
+        while (i < s.length()) {
+            substring.clear();
+            substring.put(s.charAt(i), i);
+            int len = 1;
+            int j = i + 1;
+            while (j < s.length()) {
+                Character right = s.charAt(j);
+                if (substring.containsKey(right)) {
+                    break;
+                }
+                substring.put(right, j);
+                len++;
+                j++;
+            }
+
+            result = Math.max(result, len);
+
+            if (j == s.length()) {
+                // we are done
+                break;
+            }
+            i = substring.get(s.charAt(j)) + 1;
+        }
+        return result;
+    }
 }
