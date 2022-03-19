@@ -1,7 +1,9 @@
 package hot100;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 // https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
 public class P003LongestSubstring {
@@ -10,20 +12,20 @@ public class P003LongestSubstring {
         if (s == null || s == "") {
             return result;
         }
-        Map<Character, Character> substring = new HashMap<>();
+        Set<Character> substring = new HashSet<>();
         for (int i = 0; i < s.length(); i++) {
             substring.clear();
             Character left = s.charAt(i);
-            substring.put(left, left);
+            substring.add(left);
             int len = 1;
             for (int j = i + 1; j < s.length(); j++) {
                 // [i, j] is the substring
                 Character right = s.charAt(j);
-                if (substring.containsKey(right)) {
+                if (substring.contains(right)) {
                     break;
                 } else {
                     len++;
-                    substring.put(right, right);
+                    substring.add(right);
                 }
             }
             result = Math.max(result, len);
