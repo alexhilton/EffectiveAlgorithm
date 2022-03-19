@@ -33,6 +33,8 @@ public class P003LongestSubstring {
         return result;
     }
 
+    // Move the left according to the substring, and always move the right.
+    // It should be faster than brute force, but not really.
     public static int doublePointer(String s) {
         int result = 0;
         if (s == null || s == "") {
@@ -62,6 +64,37 @@ public class P003LongestSubstring {
                 break;
             }
             i = substring.get(s.charAt(j)) + 1;
+        }
+        return result;
+    }
+
+    // Fix the right pointer, which always move to next character.
+    // Move the left when possible, which starts from 0,
+    // kicking out repeating ch from map when moving left.
+    // [left, right] contains the non-repeat substring always.
+    // O(n+n) for the worst case.
+    public static int doublePointerRight(String s) {
+        int result = 0;
+        if (s == null || s == "") {
+            return result;
+        }
+        Map<Character, Integer> substring = new HashMap<>();
+        int i = 0;
+        for (int j = 0; j < s.length(); j++) {
+            Character right = s.charAt(j);
+            substring.put(right, substring.getOrDefault(right, 0) + 1);
+            while (i < j) {
+                Character left = s.charAt(i);
+                int leftCount = substring.get(left);
+                int rightCount = substring.get(right);
+                if (leftCount != 1 || rightCount != 1) {
+                    i++;
+                    substring.put(left, leftCount - 1);
+                } else {
+                    break;
+                }
+            }
+            result = Math.max(result, j - i + 1);
         }
         return result;
     }
