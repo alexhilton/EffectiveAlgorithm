@@ -98,4 +98,31 @@ public class P003LongestSubstring {
         }
         return result;
     }
+
+    /*
+     * Based on #doublePointerRight, with optimization of HashMap.
+     * The string is a limited set of characters, which is ASCII, 128 at most.
+     * Use a 128 byte array as the HashMap, index is the ch, value is its count.
+     * The array holds non-repeat substring, so count is 2 at most, byte is very enough.
+     * This can save a lot of time by avoiding autoboxing which is inevitable when using
+     * HashMap.
+     */
+    public static int doublePointerRightArray(String s) {
+        int result = 0;
+        if (s == null || s == "") {
+            return result;
+        }
+        byte[] substring = new byte[128];
+        int i = 0;
+        for (int j = 0; j < s.length(); j++) {
+            substring[s.charAt(j)] += 1;
+            while (i < j && (substring[s.charAt(i)] != 1 || substring[s.charAt(j)] != 1)) {
+                substring[s.charAt(i)] -= 1;
+                i++;
+            }
+            result = Math.max(result, j - i + 1);
+        }
+
+        return result;
+    }
 }
