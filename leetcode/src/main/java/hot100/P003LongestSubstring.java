@@ -9,7 +9,7 @@ import java.util.Set;
 public class P003LongestSubstring {
     public static int bruteForce(String s) {
         int result = 0;
-        if (s == null || s == "") {
+        if (s == null || s.equals("")) {
             return result;
         }
         Set<Character> substring = new HashSet<>();
@@ -37,7 +37,7 @@ public class P003LongestSubstring {
     // It should be faster than brute force, but not really.
     public static int doublePointer(String s) {
         int result = 0;
-        if (s == null || s == "") {
+        if (s == null || s.equals("")) {
             return result;
         }
         Map<Character, Integer> substring = new HashMap<>();
@@ -75,7 +75,7 @@ public class P003LongestSubstring {
     // O(n+n) for the worst case.
     public static int doublePointerRight(String s) {
         int result = 0;
-        if (s == null || s == "") {
+        if (s == null || s.equals("")) {
             return result;
         }
         Map<Character, Integer> substring = new HashMap<>();
@@ -109,7 +109,7 @@ public class P003LongestSubstring {
      */
     public static int doublePointerRightArray(String s) {
         int result = 0;
-        if (s == null || s == "") {
+        if (s == null || s.equals("")) {
             return result;
         }
         byte[] substring = new byte[128];
