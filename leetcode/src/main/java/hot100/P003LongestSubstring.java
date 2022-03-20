@@ -116,7 +116,7 @@ public class P003LongestSubstring {
         int i = 0;
         for (int j = 0; j < s.length(); j++) {
             substring[s.charAt(j)] += 1;
-            while (i < j && (substring[s.charAt(i)] != 1 || substring[s.charAt(j)] != 1)) {
+            while (i < j && substring[s.charAt(j)] != 1) {
                 substring[s.charAt(i)] -= 1;
                 i++;
             }
