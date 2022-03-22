@@ -32,4 +32,55 @@ public class P004FindMedian {
         }
         return merged[merged.length / 2];
     }
+
+    // O((m+n/2)
+    // double pointer from both ends.
+    public static double doublePointer(int[] nums1, int[] nums2) {
+        int li = 0;
+        int lj = 0;
+        int ri = nums1.length - 1;
+        int rj = nums2.length - 1;
+        int left = 0;
+        int right = ri + rj;
+        while (left++ < right--) {
+            if (lj >= nums2.length || (li < nums1.length && nums1[li] <= nums2[lj])) {
+                li++;
+            } else {
+                lj++;
+            }
+
+            if (rj < 0 || (ri >= 0 && nums1[ri] >= nums2[rj])) {
+                ri--;
+            } else {
+                rj--;
+            }
+        }
+
+        int leftItem;
+        int rightItem;
+        if (li == ri && lj == rj) {
+            leftItem = nums1[li];
+            rightItem = nums2[lj];
+        } else if (li == ri) {
+            leftItem = rightItem = nums1[li];
+        } else if (lj == rj) {
+            leftItem = rightItem = nums2[lj];
+        } else {
+            if (li >= nums1.length) {
+                leftItem = nums2[lj];
+            } else if (lj >= nums2.length) {
+                leftItem = nums1[li];
+            } else {
+                leftItem = Math.min(nums1[li], nums2[lj]);
+            }
+            if (ri < 0) {
+                rightItem = nums2[rj];
+            } else if (rj < 0) {
+                rightItem = nums1[ri];
+            } else {
+                rightItem = Math.max(nums1[ri], nums2[rj]);
+            }
+        }
+        return ((double) leftItem + (double) rightItem) / 2.d;
+    }
 }
