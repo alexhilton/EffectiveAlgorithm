@@ -1,8 +1,36 @@
 package strings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Section 2 of Chap 03
 // Use double pointer to solve string questions.
 public class DoublePointer {
+    // Question 15
+    public static List<Integer> findAnagrams(String s1, String s2) {
+        List<Integer> result = new ArrayList<>();
+        if (s1.length() < s2.length()) {
+            result.add(-1);
+            return result;
+        }
+        int[] map = new int[26];
+        for (int i = 0; i < s2.length(); i++) {
+            map[s2.charAt(i) - 'a']++;
+            map[s1.charAt(i) - 'a']--;
+        }
+        if (allZero(map)) {
+            result.add(0);
+        }
+
+        for (int i = s2.length(); i < s1.length(); i++) {
+            map[s1.charAt(i) - 'a']--;
+            map[s1.charAt(i - s2.length()) - 'a']++;
+            if (allZero(map)) {
+                result.add(i - s2.length() + 1);
+            }
+        }
+        return result;
+    }
 
     // Question 14
     // double pointer, always remember to use right as anchor.
