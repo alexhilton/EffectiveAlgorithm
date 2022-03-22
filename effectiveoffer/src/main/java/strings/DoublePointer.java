@@ -6,6 +6,26 @@ import java.util.List;
 // Section 2 of Chap 03
 // Use double pointer to solve string questions.
 public class DoublePointer {
+    // Question 16
+    public static int maxUniqueSubstring(String s) {
+        if (s == null || s.equals("")) {
+            return 0;
+        }
+        int result = 0;
+        byte[] substring = new byte[128];
+        int i = 0;
+        for (int j = 0; j < s.length(); j++) {
+            substring[s.charAt(j)]++;
+            while (i < j && substring[s.charAt(j)] != 1) {
+                substring[s.charAt(i)]--;
+                i++;
+            }
+            result = Math.max(j - i + 1, result);
+        }
+
+        return result;
+    }
+
     // Question 15
     public static List<Integer> findAnagrams(String s1, String s2) {
         List<Integer> result = new ArrayList<>();

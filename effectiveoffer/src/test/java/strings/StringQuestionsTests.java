@@ -8,8 +8,18 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static strings.DoublePointer.maxUniqueSubstring;
 
 public class StringQuestionsTests {
+    @Test
+    public void testMaxSubstring() {
+        assertEquals(0, maxUniqueSubstring(""));
+        assertEquals(1, maxUniqueSubstring("a"));
+        assertEquals(3, maxUniqueSubstring("babcca"));
+        assertEquals(5, maxUniqueSubstring("abcde"));
+        assertEquals(1, maxUniqueSubstring("aaaaa"));
+    }
+
     @Test
     public void testFindAnagrams() {
         BiFunction<String, String, int[]> action = (s1, s2) -> {
