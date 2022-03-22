@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StringQuestionsTests {
     @Test
     public void testCheckInclusion() {
-        BiFunction<String, String, Boolean> action = DoublePointer::checkInclusionBruteforce;
+        BiFunction<String, String, Boolean> action = DoublePointer::checkInclusion;
 
         assertFalse(action.apply("abcdef", "abcd"));
 
