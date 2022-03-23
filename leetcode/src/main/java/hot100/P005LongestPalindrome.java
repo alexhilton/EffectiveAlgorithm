@@ -6,35 +6,25 @@ public class P005LongestPalindrome {
         if (s == null || s.length() == 0) {
             return "";
         }
-        int maxLength = 1;
-        int maxStart = 0;
-        int maxEnd = 0;
+        int[] result = {1, 0, 0};
         for (int i = 0; i < s.length(); i++) {
-            int start = i;
-            int end = i;
-            while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
-                start--;
-                end++;
-            }
-            if (maxLength < end - start - 1) {
-                maxLength = end - start - 1;
-                maxStart = start + 1;
-                maxEnd = end - 1;
-            }
-            start = i;
-            end = i + 1;
-            while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
-                start--;
-                end++;
-            }
-            if (maxLength < end - start - 1) {
-                maxLength = end - start - 1;
-                maxStart = start + 1;
-                maxEnd = end - 1;
-            }
+            findLongestPalindrome(s, i, i, result);
+            findLongestPalindrome(s, i, i + 1, result);
         }
 
-        return s.substring(maxStart, maxEnd + 1);
+        return s.substring(result[1], result[2] + 1);
+    }
+
+    private static void findLongestPalindrome(String s, int start, int end, int[] result) {
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+        if (result[0] < end - start - 1) {
+            result[0] = end - start - 1;
+            result[1] = start + 1;
+            result[2] = end - 1;
+        }
     }
 
     // Not AC.
