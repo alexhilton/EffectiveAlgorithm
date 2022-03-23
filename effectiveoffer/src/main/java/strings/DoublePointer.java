@@ -9,6 +9,8 @@ import java.util.List;
 public class DoublePointer {
     // Question 17
     // This solution is not best.
+    // For string (char set), array is much better than hash.
+    // We will revisit this question later.
     public static String minSubstring(String s, String t) {
         if (s.equals("") || t.equals("")) {
             return "";
