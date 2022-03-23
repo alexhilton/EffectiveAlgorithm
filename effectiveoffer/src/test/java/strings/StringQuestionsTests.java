@@ -2,15 +2,27 @@ package strings;
 
 import org.junit.jupiter.api.Test;
 
-import javax.crypto.AEADBadTagException;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.List;
 import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static strings.DoublePointer.maxUniqueSubstring;
+import static strings.DoublePointer.minSubstring;
 
 public class StringQuestionsTests {
+    @Test
+    public void testMinSubstring() {
+        assertEquals("", minSubstring("", ""));
+        assertEquals("", minSubstring("", "abcd"));
+        assertEquals("", minSubstring("abcd", ""));
+
+        assertEquals("a", minSubstring("a", "a"));
+        assertEquals("a", minSubstring("abcd", "a"));
+        assertEquals("a", minSubstring("aaaa", "a"));
+
+        assertEquals("BANC", minSubstring("ADDBANCAD", "ABC"));
+    }
+
     @Test
     public void testMaxSubstring() {
         assertEquals(0, maxUniqueSubstring(""));
