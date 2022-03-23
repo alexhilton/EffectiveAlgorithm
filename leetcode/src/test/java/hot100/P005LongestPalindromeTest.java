@@ -24,4 +24,10 @@ public class P005LongestPalindromeTest {
         assertEquals("aa", action.apply("aa"));
         assertEquals("aa", action.apply("aab"));
     }
+
+    @Test
+    public void testMore() {
+        assertEquals("bab", action.apply("babad"));
+        assertEquals("bb", action.apply("cbbd"));
+    }
 }
