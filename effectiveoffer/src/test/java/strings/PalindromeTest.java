@@ -3,10 +3,16 @@ package strings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static strings.Palindrome.isPalindrome;
-import static strings.Palindrome.validatePalindrome;
+import static strings.Palindrome.*;
 
 public class PalindromeTest {
+    @Test
+    public void testCountSubPalindrome() {
+        assertEquals(0, countSubPalindrome(""));
+        assertEquals(3, countSubPalindrome("abc"));
+        assertEquals(6, countSubPalindrome("aaa"));
+    }
+
     @Test
     public void testValidatePalindrome() {
         assertFalse(validatePalindrome(""));
