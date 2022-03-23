@@ -12,7 +12,7 @@ public class P005LongestPalindromeTest {
 
     @BeforeAll
     public static void setup() {
-        action = P005LongestPalindrome::bruteForce;
+        action = P005LongestPalindrome::indexAsCenter;
     }
 
     @Test
