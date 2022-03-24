@@ -30,7 +30,7 @@ public class ListNode {
 
     // For testing purpose.
     public static ListNode fromArray(int[] nums) {
-        ListNode dummy = new ListNode(0);
+        ListNode dummy = new ListNode();
         ListNode current = dummy;
         for (int n : nums) {
             current.next = new ListNode(n);
