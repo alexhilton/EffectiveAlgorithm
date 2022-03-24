@@ -1,7 +1,6 @@
-package datastructure;
+package linkedlist;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // singly-linked list
 public class ListNode {

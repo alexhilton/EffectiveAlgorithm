@@ -1,6 +1,6 @@
 package hot100;
 
-import datastructure.ListNode;
+import linkedlist.ListNode;
 
 // https://leetcode-cn.com/problems/add-two-numbers/
 public class P002AddTwoNumbers {

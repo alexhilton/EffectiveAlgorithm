@@ -1,6 +1,6 @@
 package hot100;
 
-import datastructure.ListNode;
+import linkedlist.ListNode;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.BiFunction;

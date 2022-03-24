@@ -1,4 +1,5 @@
 rootProject.name = 'EffectiveAlgorithm'
 include 'effectiveoffer'
 include 'leetcode'
+include 'datastructure'
 
