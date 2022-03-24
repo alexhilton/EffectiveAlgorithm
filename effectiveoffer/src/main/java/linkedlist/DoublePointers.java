@@ -2,6 +2,8 @@ package linkedlist;
 
 public class DoublePointers {
     // Question 21
+    // head has N nodes.
+    // 1 <= k <= N
     public static ListNode deleteRearKth(ListNode head, int k) {
         if (head == null) {
             return null;
