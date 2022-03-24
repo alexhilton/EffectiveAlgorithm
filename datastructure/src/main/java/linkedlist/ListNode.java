@@ -19,9 +19,9 @@ public class ListNode {
     }
 
     // For testing purpose
-    public int[] toArray() {
+    public static int[] toArray(ListNode head) {
         ArrayList<Integer> list = new ArrayList<>();
-        for (ListNode current = this; current != null; current = current.next) {
+        for (ListNode current = head; current != null; current = current.next) {
             list.add(current.val);
         }
 

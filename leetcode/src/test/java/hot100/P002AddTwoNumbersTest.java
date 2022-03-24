@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public class P002AddTwoNumbersTest {
     @Test
     public void testAddTwoNumbers() {
-        BiFunction<int[], int[], int[]> action = (l1, l2) -> iterateList(ListNode.fromArray(l1), ListNode.fromArray(l2)).toArray();
+        BiFunction<int[], int[], int[]> action = (l1, l2) -> ListNode.toArray(iterateList(ListNode.fromArray(l1), ListNode.fromArray(l2)));
 
         assertArrayEquals(new int[] {0}, action.apply(new int[] {0}, new int[] {0}));
         assertArrayEquals(new int[] {7, 0, 8}, action.apply(new int[] {2, 4, 3}, new int[] {5, 6, 4}));
