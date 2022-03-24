@@ -1,5 +1,6 @@
 package hot100;
 
+// https://leetcode-cn.com/problems/longest-palindromic-substring/
 public class P005LongestPalindrome {
     // O(n^2)
     public static String indexAsCenter(String s) {
