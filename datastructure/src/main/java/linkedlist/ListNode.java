@@ -30,19 +30,13 @@ public class ListNode {
 
     // For testing purpose.
     public static ListNode fromArray(int[] nums) {
-        ListNode head = null;
-        ListNode current = null;
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
         for (int n : nums) {
-            ListNode node = new ListNode(n);
-            if (head == null) {
-                head = node;
-            }
-            if (current != null) {
-                current.next = node;
-            }
-            current = node;
+            current.next = new ListNode(n);
+            current = current.next;
         }
 
-        return head;
+        return dummy.next;
     }
 }
