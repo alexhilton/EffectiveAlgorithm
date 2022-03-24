@@ -28,6 +28,7 @@ public class ListNode {
         return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    // For testing purpose.
     public static ListNode fromArray(int[] nums) {
         ListNode head = null;
         ListNode current = null;
