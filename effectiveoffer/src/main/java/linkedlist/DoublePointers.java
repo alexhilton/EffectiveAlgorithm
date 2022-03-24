@@ -3,17 +3,19 @@ package linkedlist;
 public class DoublePointers {
     // Question 21
     public static ListNode deleteRearKth(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
         ListNode dummy = new ListNode(0, head);
-
-        ListNode front = head, back = dummy;
+        ListNode left = dummy, right = dummy.next;
         for (int i = 0; i < k; i++) {
-            front = front.next;
+            right = right.next;
         }
-        while (front != null) {
-            front = front.next;
-            back = back.next;
+        while (right != null) {
+            right = right.next;
+            left = left.next;
         }
-        back.next = back.next.next;
+        left.next = left.next.next;
         return dummy.next;
     }
 }
