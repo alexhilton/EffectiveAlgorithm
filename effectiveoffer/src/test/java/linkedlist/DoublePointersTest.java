@@ -15,7 +15,7 @@ public class DoublePointersTest {
             return ListNode.toArray(result);
         };
 
-        assertArrayEquals(new int[] {}, action.apply(new int[] {}, 0));
+        assertArrayEquals(new int[] {}, action.apply(new int[] {}, 1));
         assertArrayEquals(new int[] {}, action.apply(new int[] {1}, 1));
         assertArrayEquals(new int[] {1}, action.apply(new int[] {1, 2}, 1));
         assertArrayEquals(new int[] {2}, action.apply(new int[] {1, 2}, 2));
