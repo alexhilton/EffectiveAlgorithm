@@ -32,8 +32,7 @@ public class P002AddTwoNumbers {
         }
 
         if (carry > 0) {
-            ListNode node = new ListNode(carry);
-            pr.next = node;
+            pr.next =  new ListNode(carry);
         }
 
         return result;
