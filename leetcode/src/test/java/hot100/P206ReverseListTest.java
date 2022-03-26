@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.function.Function;
 
+import static hot100.P206ReverseList.recursion;
 import static hot100.P206ReverseList.reverseList;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -14,7 +15,7 @@ public class P206ReverseListTest {
 
     @BeforeEach
     public void setup() {
-        action = list -> ListNode.toArray(reverseList(ListNode.fromArray(list)));
+        action = list -> ListNode.toArray(recursion(ListNode.fromArray(list)));
     }
 
     @Test
