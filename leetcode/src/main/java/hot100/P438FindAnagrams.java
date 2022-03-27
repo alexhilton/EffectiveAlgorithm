@@ -10,7 +10,7 @@ public class P438FindAnagrams {
             return result;
         }
 
-        int[] map = new int[26];
+        short[] map = new short[26];
         for (int i = 0; i < p.length(); i++) {
             map[p.charAt(i) - 'a']++;
             map[s.charAt(i) - 'a']--;
@@ -29,8 +29,8 @@ public class P438FindAnagrams {
         return result;
     }
 
-    private static boolean allZero(int[] counts) {
-        for (int c : counts) {
+    private static boolean allZero(short[] counts) {
+        for (short c : counts) {
             if (c != 0) {
                 return false;
             }
