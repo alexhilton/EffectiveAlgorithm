@@ -2,8 +2,6 @@ package hot100;
 
 import linkedlist.ListNode;
 
-import java.util.Arrays;
-
 public class P206ReverseList {
     public static ListNode reverseList(ListNode head) {
         ListNode dummy = new ListNode(0, head);
