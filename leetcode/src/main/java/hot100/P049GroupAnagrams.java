@@ -6,16 +6,18 @@ import java.util.List;
 public class P049GroupAnagrams {
     public static List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> result = new ArrayList<>();
+        List<byte[]> keys = new ArrayList<>();
         for (int i = 0; i < strs.length; i++) {
-            byte[] current = strMap(strs[i]);
+            byte[] currentKey = hash(strs[i]);
             List<String> group = null;
-            for (List<String> subList : result) {
-                if (match(current, strMap(subList.get(0)))) {
-                    group = subList;
+            for (int k = 0; k < keys.size(); k++) {
+                if (matchKey(currentKey, keys.get(k))) {
+                    group = result.get(k);
                     break;
                 }
             }
             if (group == null) {
+                keys.add(currentKey);
                 group = new ArrayList<>();
                 result.add(group);
             }
@@ -24,7 +26,7 @@ public class P049GroupAnagrams {
         return result;
     }
 
-    private static byte[] strMap(String str) {
+    private static byte[] hash(String str) {
         byte[] map = new byte[26];
         for (char ch : str.toCharArray()) {
             map[ch - 'a']++;
@@ -33,9 +35,9 @@ public class P049GroupAnagrams {
         return map;
     }
 
-    private static boolean match(byte[] map1, byte[] map2) {
+    private static boolean matchKey(byte[] key1, byte[] key2) {
         for (int i = 0; i < 26; i++) {
-            if (map1[i] != map2[i]) {
+            if (key1[i] != key2[i]) {
                 return false;
             }
         }
