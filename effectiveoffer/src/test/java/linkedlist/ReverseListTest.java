@@ -10,7 +10,7 @@ public class ReverseListTest {
     @Test
     public void testAddTwoNumbers() {
         BiFunction<int[], int[], int[]> action = (a, b) -> {
-            ListNode result = ReverseList.addTwoNumbers(ListNode.fromArray(a), ListNode.fromArray(b));
+            ListNode result = ReverseList.addTwoNumbersAgain(ListNode.fromArray(a), ListNode.fromArray(b));
             return ListNode.toArray(result);
         };
 
