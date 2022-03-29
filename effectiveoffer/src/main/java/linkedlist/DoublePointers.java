@@ -47,6 +47,7 @@ public class DoublePointers {
             return null;
         }
 
+        // Will it be a valid cycle, if there is only one node, to which its next points.
         ListNode slow = head.next;
         ListNode fast = slow.next;
         while (slow != null && fast != null) {
