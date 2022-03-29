@@ -1,6 +1,37 @@
 package linkedlist;
 
 public class DoublePointers {
+    // Question 23
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        final int count1 = countList(headA);
+        final int count2 = countList(headB);
+        int delta = Math.abs(count1 - count2);
+        ListNode longer = count1 > count2 ? headA : headB;
+        ListNode shorter = count1 < count1 ? headA : headB;
+
+        ListNode right = longer;
+        for (int i = 0; i < delta; i++) {
+            right = right.next;
+        }
+
+        ListNode left = shorter;
+        while (left != right) {
+            left = left.next;
+            right = right.next;
+        }
+
+        return left;
+    }
+
+    private int countList(ListNode head) {
+        int count = 0;
+        for (ListNode current = head; current != null; current = current.next) {
+            count++;
+        }
+
+        return count;
+    }
+
     // Question 22
     public ListNode detectCycle(ListNode head) {
         ListNode inLoop = getNodeInLoop(head);
