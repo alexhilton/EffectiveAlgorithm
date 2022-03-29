@@ -1,6 +1,69 @@
 package linkedlist;
 
 public class DoublePointers {
+    // Question 22
+    public ListNode detectCycle(ListNode head) {
+        ListNode inLoop = getNodeInLoop(head);
+        if (inLoop == null) {
+            return null;
+        }
+
+        ListNode node = head;
+        while (node != inLoop) {
+            node = node.next;
+            inLoop = inLoop.next;
+        }
+
+        return node;
+    }
+
+    public static ListNode detectCycleWithCount(ListNode head) {
+        ListNode inLoop = getNodeInLoop(head);
+        if (inLoop == null) {
+            return null;
+        }
+
+        int loopCount = 1;
+        for (ListNode n = inLoop; n.next != inLoop; n = n.next) {
+            loopCount++;
+        }
+
+        ListNode fast = head;
+        for (int i = 0; i < loopCount; i++) {
+            fast = fast.next;
+        }
+
+        ListNode slow = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        return slow;
+    }
+
+    private static ListNode getNodeInLoop(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        ListNode slow = head.next;
+        ListNode fast = slow.next;
+        while (slow != null && fast != null) {
+            if (slow == fast) {
+                return slow;
+            }
+
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != null) {
+                fast = fast.next;
+            }
+        }
+
+        return null;
+    }
+
     // Question 21
     // head has N nodes.
     // 1 <= k <= N
