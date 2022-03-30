@@ -1,6 +1,35 @@
 package linkedlist;
 
 public class ReverseList {
+    // n is the count of list
+    // n is even, median = ([n-1/2] + [n+1/2]) / 2
+    // n is odd, median = [n/2]
+    public static double findMedianInList(ListNode head) {
+        if (head == null) {
+            return 0;
+        } else if (head.next == null) {
+            return head.val;
+        }
+        // Need to find the [n/2 - 1] node, then check the count is even or odd
+        // if even, return (node + node.next) / 2
+        // if odd, return node.next
+        // slow start from 0, step is 1, stop at [n/2 - 1]
+        // fast starts from 1, step is 2, stops at [n-2], which is odd, or stops at [n-1] which is even
+        ListNode slow = head;
+        ListNode fast = slow.next;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        if (fast.next == null) {
+            // even
+            return (slow.val + slow.next.val) / 2.0;
+        }
+        // odd
+        return slow.next.val;
+    }
+
     // Question 27
     public static boolean isPalindromeList(ListNode head) {
         if (head == null || head.next == null) {

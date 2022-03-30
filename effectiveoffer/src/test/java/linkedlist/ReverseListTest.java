@@ -9,6 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReverseListTest {
     @Test
+    public void testFindMedianInList() {
+        Function<int[], Double> action = a -> ReverseList.findMedianInList(ListNode.fromArray(a));
+
+        assertEquals(0, action.apply(new int[] {0}));
+        assertEquals(1, action.apply(new int[] {1}));
+        assertEquals(1.5, action.apply(new int[] {1, 2}));
+        assertEquals(2, action.apply(new int[] {1, 2, 3}));
+
+        assertEquals(2.5, action.apply(new int[] {1, 2, 3, 4}));
+        assertEquals(3, action.apply(new int[] {1, 2, 3, 4, 5}));
+    }
+
+    @Test
     public void testCheckPalindromeList() {
         Function<int[], Boolean> action = a -> ReverseList.isPalindromeList(ListNode.fromArray(a));
 
