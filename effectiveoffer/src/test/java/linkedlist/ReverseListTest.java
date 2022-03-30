@@ -5,9 +5,25 @@ import org.junit.jupiter.api.Test;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReverseListTest {
+    @Test
+    public void testCheckPalindromeList() {
+        Function<int[], Boolean> action = a -> ReverseList.isPalindromeList(ListNode.fromArray(a));
+
+        assertTrue(action.apply(new int[] {}));
+        assertTrue(action.apply(new int[] {1}));
+        assertTrue(action.apply(new int[] {1, 1}));
+        assertTrue(action.apply(new int[] {1, 2, 1}));
+        assertTrue(action.apply(new int[] {1, 2, 3, 3, 2, 1}));
+        assertTrue(action.apply(new int[] {1, 2, 3, 4, 3, 2, 1}));
+
+        assertFalse(action.apply(new int[] {1, 2}));
+        assertFalse(action.apply(new int[] {1, 2, 3}));
+        assertFalse(action.apply(new int[] {1, 2, 3, 4, 5}));
+    }
+
     @Test
     public void testReorderList() {
         Function<int[], int[]> action = a -> {
