@@ -3,10 +3,26 @@ package linkedlist;
 import org.junit.jupiter.api.Test;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class ReverseListTest {
+    @Test
+    public void testReorderList() {
+        Function<int[], int[]> action = a -> {
+            ListNode result = ReverseList.reorderList(ListNode.fromArray(a));
+            return ListNode.toArray(result);
+        };
+
+        assertArrayEquals(new int[] {}, action.apply(new int[] {}));
+        assertArrayEquals(new int[] {1}, action.apply(new int[] {1}));
+        assertArrayEquals(new int[] {1, 2}, action.apply(new int[] {1, 2}));
+        assertArrayEquals(new int[] {1, 3, 2}, action.apply(new int[] {1, 2, 3}));
+        assertArrayEquals(new int[] {1, 5, 2, 4, 3}, action.apply(new int[] {1, 2, 3, 4, 5}));
+        assertArrayEquals(new int[] {1, 6, 2, 5, 3, 4}, action.apply(new int[] {1, 2, 3, 4, 5, 6}));
+    }
+
     @Test
     public void testAddTwoNumbers() {
         BiFunction<int[], int[], int[]> action = (a, b) -> {

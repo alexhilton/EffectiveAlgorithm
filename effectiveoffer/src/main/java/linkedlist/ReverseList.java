@@ -1,6 +1,44 @@
 package linkedlist;
 
 public class ReverseList {
+    // Question 26
+    public static ListNode reorderList(ListNode head) {
+        ListNode dummy = new ListNode(0, head);
+
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast.next != null) {
+                fast = fast.next;
+            }
+        }
+
+        ListNode temp = slow.next;
+        slow.next = null;
+        crossLink(head, reverseList(temp), dummy);
+        return dummy.next;
+    }
+
+    private static void crossLink(ListNode node1, ListNode node2, ListNode head) {
+        ListNode prev = head;
+        while (node1 != null && node2 != null) {
+            ListNode temp = node1.next;
+            prev.next = node1;
+            node1.next = node2;
+            prev = node2;
+
+            node1 = temp;
+            node2 = node2.next;
+        }
+
+        // first half is always longer.
+        if (node1 != null) {
+            prev.next = node1;
+        }
+    }
+
     // Question 25
     public static ListNode addTwoNumbersAgain(ListNode head1, ListNode head2) {
         head1 = reverseList(head1);
