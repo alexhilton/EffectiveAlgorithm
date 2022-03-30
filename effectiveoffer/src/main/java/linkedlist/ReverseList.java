@@ -7,6 +7,12 @@ public class ReverseList {
             return true;
         }
 
+        /*
+         * Pay close attention to the pivoting algorithm, which has much difference with Question 26.
+         * Question 26 requires first half is longer, if possible. So it iterates from head until tail
+         * to make slow points to the second half.
+         * But in this question, slow should point to the node before the median.
+         */
         ListNode slow = head;
         ListNode fast = head.next;
         while (fast.next != null && fast.next.next != null) {
@@ -52,7 +58,8 @@ public class ReverseList {
                 fast = fast.next;
             }
         }
-
+        // slow starts from 0, step is 1, stops at [n/2 + 1]
+        // fast starts from 0, step is 2, stops at [n - 1]
         ListNode temp = slow.next;
         slow.next = null;
         crossLink(head, reverseList(temp), dummy);
