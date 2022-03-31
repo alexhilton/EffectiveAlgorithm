@@ -33,4 +33,17 @@ public class P206ReverseList {
 
         return newHead;
     }
+
+    public static ListNode reverseWithRecursion(ListNode head) {
+        return recursivelyReverse(head, null);
+    }
+
+    private static ListNode recursivelyReverse(ListNode current, ListNode prev) {
+        if (current == null) {
+            return prev;
+        }
+        ListNode next = current.next;
+        current.next = prev;
+        return recursivelyReverse(next, current);
+    }
 }
