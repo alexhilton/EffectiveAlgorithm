@@ -82,4 +82,19 @@ public class DoubleLinkedList {
         }
         return tail;
     }
+
+    // Exercises for double linked list
+    public static Node append(Node head, int val) {
+        if (head == null) {
+            return new Node(val);
+        }
+        Node curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        Node node = new Node(val);
+        curr.next = node;
+        node.prev = curr;
+        return head;
+    }
 }
