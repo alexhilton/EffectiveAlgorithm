@@ -1,6 +1,48 @@
 package linkedlist;
 
 public class DoubleLinkedList {
+    // Question 29
+    // Handling circle linked list.
+    // The list must be a circle, so if there is only one node, its next should point to itself.
+    public static ListNode insertInCircle(ListNode head, int insertVal) {
+        ListNode node = new ListNode(insertVal);
+        if (head == null) {
+            head = node;
+            head.next = head;
+        } else if (head.next == head) {
+            // The list must be a circle, so if there is only one node,
+            // its next points to itself, which is the condition of single node.
+            head.next = node;
+            node.next = head;
+        } else {
+            insertCore(head, node);
+        }
+        return head;
+    }
+
+    private static void insertCore(ListNode head, ListNode node) {
+        ListNode cur = head;
+        ListNode next = head.next;
+        ListNode biggest = head;
+        // Biggest is the tail, actually.
+        // The terminal of circle linked list is when reach the head again.
+        while (!(cur.val <= node.val && next.val >= node.val) && next != head) {
+            cur = next;
+            next = next.next;
+            if (cur.val >= biggest.val) {
+                biggest = cur;
+            }
+        }
+
+        if (cur.val <= node.val && next.val >= node.val) {
+            cur.next = node;
+            node.next = next;
+        } else {
+            node.next = biggest.next;
+            biggest.next = node;
+        }
+    }
+
     // Question 28
     public Node flatten(Node head) {
         flattenGetTail(head);

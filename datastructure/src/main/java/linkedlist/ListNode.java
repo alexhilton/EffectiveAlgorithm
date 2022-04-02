@@ -19,6 +19,55 @@ public class ListNode {
     }
 
     // For testing purpose
+    public static ListNode tail(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+
+        return curr;
+    }
+
+    // For testing purpose
+    public static boolean isCircle(ListNode head) {
+        if (head == null) {
+            return true;
+        }
+        ListNode curr = head;
+        while (curr.next != null && curr.next != head) {
+            curr = curr.next;
+        }
+
+        return curr.next != null;
+    }
+
+    // For testing purpose
+    public static ListNode forgeCircle(ListNode head) {
+        ListNode tail = tail(head);
+        if (tail != null) {
+            tail.next = head;
+        }
+
+        return head;
+    }
+
+    // for testing purpose.
+    public static ListNode breakCircle(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode curr = head;
+        while (curr.next != head) {
+            curr = curr.next;
+        }
+        curr.next = null;
+        return head;
+    }
+
+    // For testing purpose
     public static int[] toArray(ListNode head) {
         ArrayList<Integer> list = new ArrayList<>();
         for (ListNode current = head; current != null; current = current.next) {
