@@ -123,4 +123,33 @@ public class DoubleLinkedList {
         }
         return head;
     }
+
+    // Had better break the deleted node.
+    public static Node deleteValue(Node head, int value) {
+        if (head == null || (head.next == null && head.val == value)) {
+            return null;
+        }
+        if (head.val == value) {
+            Node newHead = head.next;
+            head.next = null;
+            newHead.prev = null;
+            return newHead;
+        }
+        Node curr = head.next;
+        while (curr != null && curr.val != value) {
+            curr = curr.next;
+        }
+        if (curr != null) {
+            // curr should be deleted
+            Node prev = curr.prev;
+            Node next = curr.next;
+            prev.next = next;
+            if (next != null) {
+                next.prev = prev;
+            }
+            curr.next = null;
+            curr.prev = null;
+        }
+        return head;
+    }
 }

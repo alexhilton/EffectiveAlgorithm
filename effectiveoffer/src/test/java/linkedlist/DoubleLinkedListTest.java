@@ -44,4 +44,20 @@ public class DoubleLinkedListTest {
         assertArrayEquals(new int[] {1, 2, 3}, Node.toArray(DoubleLinkedList.insertAt(Node.fromArray(new int[] {2, 3}), 1, 0)));
         assertArrayEquals(new int[] {1, 2, 3}, Node.toArray(DoubleLinkedList.insertAt(Node.fromArray(new int[] {1, 2}), 3, 2)));
     }
+
+    @Test
+    public void testDeleteValue() {
+        BiFunction<int[], Integer, int[]> action = (a, v) -> Node.toArray(DoubleLinkedList.deleteValue(Node.fromArray(a), v));
+
+        assertArrayEquals(new int[] {}, action.apply(new int[] {}, 2));
+        assertArrayEquals(new int[] {}, action.apply(new int[] {1}, 1));
+
+        assertArrayEquals(new int[] {2}, action.apply(new int[] {1, 2}, 1));
+        assertArrayEquals(new int[] {1}, action.apply(new int[] {1, 2}, 2));
+        assertArrayEquals(new int[] {2, 3}, action.apply(new int[] {1, 2, 3}, 1));
+        assertArrayEquals(new int[] {1, 3}, action.apply(new int[] {1, 2, 3}, 2));
+        assertArrayEquals(new int[] {1, 2}, action.apply(new int[] {1, 2, 3}, 3));
+
+        assertArrayEquals(new int[] {1, 2, 3}, action.apply(new int[] {1, 2, 3}, 6));
+    }
 }
