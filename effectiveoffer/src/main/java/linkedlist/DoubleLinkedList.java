@@ -97,4 +97,30 @@ public class DoubleLinkedList {
         node.prev = curr;
         return head;
     }
+
+    public static Node insertAt(Node head, int val, int index) {
+        Node node = new Node(val);
+        if (head == null) {
+            return node;
+        }
+        if (index == 0) {
+            // Head will be refreshed, so must deal with it specially.
+            node.next = head;
+            head.prev = node;
+            return node;
+        }
+        Node curr = head;
+        for (int i = 1; i < index; i++) {
+            curr = curr.next;
+        }
+        // Insert node between curr and its next.
+        Node next = curr.next;
+        node.next = next;
+        node.prev = curr;
+        curr.next = node;
+        if (next != null) {
+            next.prev = node;
+        }
+        return head;
+    }
 }
