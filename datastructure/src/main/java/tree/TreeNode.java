@@ -1,10 +1,7 @@
 package tree;
 
 
-import com.sun.source.tree.Tree;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TreeNode {
@@ -72,5 +69,80 @@ public class TreeNode {
         }
 
         return result;
+    }
+
+    public static List<Integer> postOrder(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+
+        if (root.left != null) {
+            result.addAll(postOrder(root.left));
+        }
+
+        if (root.right != null) {
+            result.addAll(postOrder(root.right));
+        }
+
+        result.add(root.val);
+
+        return result;
+    }
+
+    private static void preOrderPrint(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        System.out.println(root.val);
+
+        if (root.left != null) {
+            preOrderPrint(root.left);
+        }
+        if (root.right != null) {
+            preOrderPrint(root.right);
+        }
+    }
+
+    private static void postOrderPrint(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        if (root.left != null) {
+            preOrderPrint(root.left);
+        }
+
+        if (root.right != null) {
+            preOrderPrint(root.right);
+        }
+
+        System.out.println(root.val);
+
+    }
+
+    private static void inOrderPrint(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (root.left != null) {
+            preOrderPrint(root.left);
+        }
+
+        System.out.println(root.val);
+
+        if (root.right != null) {
+            preOrderPrint(root.right);
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = fromArray(new Integer[] {1, 2, 3});
+        System.out.println("Pre order: ");
+        preOrderPrint(root);
+        System.out.println("Post order: ");
+        postOrderPrint(root);
+        System.out.println("Middle order: ");
+        inOrderPrint(root);
     }
 }
