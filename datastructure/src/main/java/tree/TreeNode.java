@@ -90,7 +90,7 @@ public class TreeNode {
         return result;
     }
 
-    private static void preOrderPrint(TreeNode root) {
+    public static void preOrderPrint(TreeNode root) {
         if (root == null) {
             return;
         }
