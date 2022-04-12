@@ -3,6 +3,39 @@ package hash;
 import java.util.*;
 
 public class MoreHashing {
+    // Question 34
+    public boolean isAlienSorted(String[] words, String order) {
+        int[] orderArray = new int[order.length()];
+        for (int i = 0; i < order.length(); i++) {
+            orderArray[order.charAt(i) - 'a'] = i;
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            if (!isSorted(words[i], words[i + 1], orderArray)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isSorted(String a, String b, int[] order) {
+        int i = 0;
+        for (; i < a.length() && i < b.length(); i++) {
+            char cha = a.charAt(i);
+            char chb = b.charAt(i);
+            if (order[cha - 'a'] < order[chb - 'a']) {
+                return true;
+            }
+
+            if (order[cha - 'a'] > order[chb - 'a']) {
+                return false;
+            }
+        }
+
+        return i == a.length();
+    }
+
     // Question 33
     // Use sorted string as the key, anagrams has the same sorted key.
     public List<List<String>> groupAnagramsAgain(String[] strs) {
