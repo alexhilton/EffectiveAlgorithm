@@ -14,13 +14,14 @@ public class P821ShortestDistance {
 
         int[] result = new int[s.length()];
         for (int k = 0; k < indices.size(); k++) {
-            int prev = k > 0 ? (indices.get(k) + indices.get(k - 1)) / 2 + 1 : 0;
-            for (int i = prev; i <= indices.get(k); i++) {
-                result[i] = indices.get(k) - i;
+            int center = indices.get(k);
+            int leftRadius = k > 0 ? (center - indices.get(k - 1)) / 2 : center;
+            for (int i = center - 1; i >= center - leftRadius; i--) {
+                result[i] = center - i;
             }
-            int next = k + 1 >= indices.size() ? indices.size() - 1 : (indices.get(k) + indices.get(k + 1)) / 2 + 1;
-            for (int j = indices.get(k); j < next; j++) {
-                result[j] = j - indices.get(k);
+            int rightRadius = k + 1 >= indices.size() ? s.length() - center - 1 : (indices.get(k + 1) - center) / 2;
+            for (int j = center + 1; j <= center + rightRadius; j++) {
+                result[j] = j - center;
             }
         }
 
