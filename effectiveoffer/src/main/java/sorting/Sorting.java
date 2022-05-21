@@ -18,7 +18,7 @@ public class Sorting {
         mergeSortFunc(dst, src, mid, end);
 
         int i = start, j = mid, k = start;
-        while (i < end || j < end) {
+        while (i < mid || j < end) {
             if (j == end || (i < mid && src[i] < src[j])) {
                 dst[k++] = src[i++];
             } else {

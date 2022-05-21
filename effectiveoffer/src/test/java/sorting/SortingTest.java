@@ -17,7 +17,10 @@ public class SortingTest {
 
     @Test
     public void testSort() {
+        assertArrayEquals(new int[] {2}, action.apply(new int[] {2}));
         assertArrayEquals(new int[] {1, 2}, action.apply(new int[] {2, 1}));
-        assertArrayEquals(new int[] {1, 1}, action.apply(new int[] {1, 1}));
+        assertArrayEquals(new int[] {1, 2, 3}, action.apply(new int[] {2, 1, 3}));
+        assertArrayEquals(new int[] {1, 1, 1}, action.apply(new int[] {1, 1, 1}));
+        assertArrayEquals(new int[] {1, 1, 2, 3, 5, 7, 9}, action.apply(new int[] {5, 3, 1, 7, 9, 2, 1}));
     }
 }
