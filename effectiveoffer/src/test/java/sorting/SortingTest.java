@@ -12,7 +12,7 @@ public class SortingTest {
 
     @BeforeEach
     public void setup() {
-        action = Sorting::mergeSort;
+        action = Sorting::iteratedMergeSort;
     }
 
     @Test
