@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -105,9 +107,45 @@ public class CollectionTricks {
         System.out.println(ageNList);
     }
 
+    private static void playWithMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("Guard", "James Harden");
+        map.put("Forward", "Kevin Durant");
+        map.put("Point Guard", "Kyrie Irving");
+
+        map.forEach(
+                (k, v) -> System.out.println(k + " -> " + v)
+        );
+
+        map.entrySet().forEach(entry -> System.out.println(entry.getKey() + " -> " + entry.getValue()));
+
+        map.keySet().forEach(System.out::println);
+
+        map.values().stream().forEach(System.out::println);
+
+        List<String> guards = map.entrySet().stream()
+                .filter(entry -> entry.getKey().contains("Guard"))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+        System.out.println(guards);
+
+        List<String> positions = map.keySet().stream().collect(Collectors.toList());
+        System.out.println(positions);
+
+        List<String> players = map.values().stream().collect(Collectors.toList());
+        System.out.println(players);
+
+        String[] keyArray = map.keySet().toArray(String[]::new);
+        System.out.println(Arrays.deepToString(keyArray));
+        String[] valueArray = map.values().toArray(String[]::new);
+        System.out.println(Arrays.deepToString(valueArray));
+    }
+
     public static void main(String[] args) {
         playWithArrays();
 
         playWithNLists();
+
+        playWithMap();
     }
 }
