@@ -52,7 +52,7 @@ public class CollectionTricks {
                         .collect(Collectors.toList());
         System.out.println(aToList);
 
-        String[] nameArray = nameList.toArray(String[]::new);
+        String[] nameArray = nameList.toArray(new String[0]);
         Arrays.stream(nameArray).forEach(System.out::println);
 
         int[] aArray = aToList.stream().mapToInt(Integer::intValue).toArray();
@@ -76,7 +76,7 @@ public class CollectionTricks {
         System.out.println(ageHeights);
 
         String[][] nameArrays = lists.stream()
-                .map(row -> row.toArray(String[]::new))
+                .map(row -> row.toArray(new String[0]))
                 .toArray(String[][]::new);
         System.out.println(Arrays.deepToString(nameArrays));
 
@@ -135,9 +135,9 @@ public class CollectionTricks {
         List<String> players = map.values().stream().collect(Collectors.toList());
         System.out.println(players);
 
-        String[] keyArray = map.keySet().toArray(String[]::new);
+        String[] keyArray = map.keySet().toArray(new String[0]);
         System.out.println(Arrays.deepToString(keyArray));
-        String[] valueArray = map.values().toArray(String[]::new);
+        String[] valueArray = map.values().toArray(new String[0]);
         System.out.println(Arrays.deepToString(valueArray));
     }
 
