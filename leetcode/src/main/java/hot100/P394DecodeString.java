@@ -1,16 +1,10 @@
 package hot100;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 public class P394DecodeString {
     public static String decodeString(String s) {
-        String[] parts = s.split("\\[");
-        System.out.println(Arrays.deepToString(parts));
-
         Stack<Integer> count = new Stack<>();
-        Stack<Integer> start = new Stack<>();
-        Stack<Integer> end = new Stack<>();
         Stack<String> payloads = new Stack<>();
         StringBuilder result = new StringBuilder();
 
@@ -39,13 +33,32 @@ public class P394DecodeString {
                 payloads.push(s.substring(i, j));
                 i = j;
             } else if (ch == ']') {
+                StringBuilder sb = new StringBuilder();
+                while (!payloads.isEmpty() && !payloads.peek().equals("[")) {
+                    // Pay attention to order, stack is FILO, so always insert at head.
+                    sb.insert(0, payloads.pop());
+                }
+                if (!payloads.isEmpty()) {
+                    // discard '['
+                    payloads.pop();
+                }
+
                 int c = count.pop();
-                String str = payloads.pop();
+                StringBuilder ssb = new StringBuilder();
                 for (int k = 0; k < c; k++) {
-                    result.append(str);
+                    ssb.append(sb);
+                }
+                if (count.isEmpty()) {
+                    // No recursive, so add to result directly.
+                    result.append(ssb);
+                } else {
+                    // Recursive, in to stack, waiting for later ']'
+                    payloads.push(ssb.toString());
                 }
                 i++;
             } else {
+                // must be '[', into stack as a delimiter
+                payloads.push(Character.toString(ch));
                 i++;
             }
         }
