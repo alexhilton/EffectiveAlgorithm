@@ -1,27 +1,21 @@
 package daily;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class P745WordFilter {
     private TrieNode prefixRoot;
     private TrieNode suffixRoot;
-    private Map<String, Integer> wordToIndex;
 
     public P745WordFilter(String[] words) {
         prefixRoot = new TrieNode();
         suffixRoot = new TrieNode();
-        wordToIndex = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
-            buildTrie(prefixRoot, words[i], true);
-            buildTrie(suffixRoot, words[i], false);
-            wordToIndex.put(words[i], i);
+            buildTrie(prefixRoot, words[i], i, true);
+            buildTrie(suffixRoot, words[i], i, false);
         }
     }
 
-    private void buildTrie(TrieNode root, String w, boolean prefix) {
+    private void buildTrie(TrieNode root, String w, int index, boolean prefix) {
         TrieNode node = root;
         for (int i = 0; i < w.length(); i++) {
             char ch = w.charAt(prefix ? i : w.length() - i - 1);
@@ -30,45 +24,38 @@ public class P745WordFilter {
                 node.children[idx] = new TrieNode();
             }
             node = node.children[idx];
+            node.indices.add(index);
         }
-        node.isWord = true;
     }
 
     public int f(String pref, String suff) {
-        System.out.println("prefix " + pref + ", suffix -> " + suff);
         TrieNode prefixNode = startsWith(prefixRoot, pref, true);
-        Set<String> prefixSet = new HashSet<>();
-        dfs(prefixNode, prefixSet, pref, true);
-        prefixSet.forEach(System.out::println);
+        if (prefixNode == null) {
+            return -1;
+        }
 
-        System.out.println("see suffix set ");
         TrieNode suffixNode = startsWith(suffixRoot, suff, false);
-        Set<String> suffixSet = new HashSet<>();
-        dfs(suffixNode, suffixSet, reverse(suff), false);
-        suffixSet.forEach(System.out::println);
-
-        return prefixSet.stream()
-                .filter(w -> suffixSet.contains(w))
-                .map(w -> wordToIndex.get(w))
-                .mapToInt(Integer::intValue)
-                .max()
-                .orElse(-1);
-    }
-
-    private void dfs(TrieNode root, Set<String> set, String pref, boolean prefix) {
-        if (root == null) {
-            return;
+        if (suffixNode == null) {
+            return -1;
         }
-        TrieNode node = root;
-        if (node.isWord) {
-            set.add(prefix ? pref : reverse(pref));
-        }
-        for (int i = 0; i < 26; i++) {
-            if (node.children[i] != null) {
-                char ch = (char) (i + 'a');
-                dfs(node.children[i], set, pref + ch, prefix);
+
+        List<Integer> preIndices = prefixNode.indices;
+        List<Integer> suffIndices = suffixNode.indices;
+        int i = preIndices.size() - 1;
+        int j = suffIndices.size() - 1;
+        while (i >= 0 && j >= 0) {
+            int pi = preIndices.get(i);
+            int si = suffIndices.get(j);
+            if (pi == si) {
+                return pi;
+            } if (pi > si) {
+                i--;
+            } else {
+                j--;
             }
         }
+
+        return -1;
     }
 
     private TrieNode startsWith(TrieNode root, String pref, boolean prefix) {
@@ -85,22 +72,13 @@ public class P745WordFilter {
         return node;
     }
 
-    private String reverse(String str) {
-        StringBuilder sb = new StringBuilder(str.length());
-        for (int i = str.length() - 1; i >= 0; i--) {
-            sb.append(str.charAt(i));
-        }
-
-        return sb.toString();
-    }
-
     private class TrieNode {
         TrieNode[] children;
-        boolean isWord;
+        List<Integer> indices;
 
         public TrieNode() {
             children = new TrieNode[26];
-            isWord = false;
+            indices = new LinkedList<>();
         }
     }
 
