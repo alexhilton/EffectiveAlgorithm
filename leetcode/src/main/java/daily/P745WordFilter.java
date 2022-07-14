@@ -38,13 +38,13 @@ public class P745WordFilter {
         System.out.println("prefix " + pref + ", suffix -> " + suff);
         TrieNode prefixNode = startsWith(prefixRoot, pref, true);
         Set<String> prefixSet = new HashSet<>();
-        dfs(prefixNode, prefixSet, new StringBuilder(pref), true);
+        dfs(prefixNode, prefixSet, pref, true);
         prefixSet.forEach(System.out::println);
 
         System.out.println("see suffix set ");
         TrieNode suffixNode = startsWith(suffixRoot, suff, false);
         Set<String> suffixSet = new HashSet<>();
-        dfs(suffixNode, suffixSet, new StringBuilder(suff).reverse(), false);
+        dfs(suffixNode, suffixSet, reverse(suff), false);
         suffixSet.forEach(System.out::println);
 
         return prefixSet.stream()
@@ -55,18 +55,18 @@ public class P745WordFilter {
                 .orElse(-1);
     }
 
-    private void dfs(TrieNode root, Set<String> set, StringBuilder sb, boolean prefix) {
+    private void dfs(TrieNode root, Set<String> set, String pref, boolean prefix) {
         if (root == null) {
             return;
         }
         TrieNode node = root;
         if (node.isWord) {
-            set.add(prefix ? sb.toString() : sb.reverse().toString());
+            set.add(prefix ? pref : reverse(pref));
         }
         for (int i = 0; i < 26; i++) {
             if (node.children[i] != null) {
-                sb.append((char) (i + 'a'));
-                dfs(node.children[i], set, new StringBuilder(sb), prefix);
+                char ch = (char) (i + 'a');
+                dfs(node.children[i], set, pref + ch, prefix);
             }
         }
     }

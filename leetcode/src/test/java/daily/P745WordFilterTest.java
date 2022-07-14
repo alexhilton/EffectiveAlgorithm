@@ -10,6 +10,7 @@ public class P745WordFilterTest {
         P745WordFilter wf = new P745WordFilter(new String[] {"apple"});
         assertEquals(-1, wf.f("e", "e"));
         assertEquals(0, wf.f("a", "e"));
+        assertEquals(0, wf.f("apple", "apple"));
     }
 
     @Test
