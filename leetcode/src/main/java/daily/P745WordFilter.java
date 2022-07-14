@@ -35,6 +35,7 @@ public class P745WordFilter {
     }
 
     public int f(String pref, String suff) {
+        System.out.println("prefix " + pref + ", suffix -> " + suff);
         TrieNode prefixNode = startsWith(prefixRoot, pref, true);
         Set<String> prefixSet = new HashSet<>();
         dfs(prefixNode, prefixSet, new StringBuilder(pref), true);
@@ -82,6 +83,15 @@ public class P745WordFilter {
         }
 
         return node;
+    }
+
+    private String reverse(String str) {
+        StringBuilder sb = new StringBuilder(str.length());
+        for (int i = str.length() - 1; i >= 0; i--) {
+            sb.append(str.charAt(i));
+        }
+
+        return sb.toString();
     }
 
     private class TrieNode {
