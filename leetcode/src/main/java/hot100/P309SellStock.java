@@ -2,12 +2,12 @@ package hot100;
 
 public class P309SellStock {
     public static int maxProfit(int[] prices) {
-        if (prices.length == 1) {
+        int n = prices.length;
+        if (n == 1) {
             return 0;
-        } else if (prices.length == 2) {
+        } else if (n == 2) {
             return Math.max(0, prices[1] - prices[0]);
         }
-        int n = prices.length;
         int[] dp = new int[n];
         dp[1] = Math.max(0, prices[1] - prices[0]);
         int result = dp[1];
