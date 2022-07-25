@@ -12,13 +12,13 @@ public class P309SellStock {
         dp[1] = Math.max(0, prices[1] - prices[0]);
         int result = dp[1];
         for (int i = 2; i < n; i++) {
-            int k = 0;
-            for (int j = 0; j < i - 1; j++) {
+            int k = 1;
+            for (int j = k; j < i; j++) {
                 if (prices[j] < prices[k]) {
                     k = j;
                 }
                 int p = prices[i] - prices[k];
-                dp[i] = Math.max(dp[i], p > 0 ? dp[j] + p : dp[j]);
+                dp[i] = Math.max(dp[i], p > 0 ? dp[k - 1] + p : dp[i - 1]);
             }
             result = Math.max(result, dp[i]);
         }

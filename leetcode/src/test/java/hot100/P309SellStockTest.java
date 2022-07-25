@@ -14,6 +14,7 @@ public class P309SellStockTest {
         assertEquals(0, maxProfit(new int[] {1, 1}));
         assertEquals(0, maxProfit(new int[] {1, 1, 1}));
         assertEquals(0, maxProfit(new int[] {7, 6, 5, 4, 3, 2, 1}));
+//        assertEquals(2, maxProfit(new int[] {1, 2, 3}));
     }
 
     @Test
