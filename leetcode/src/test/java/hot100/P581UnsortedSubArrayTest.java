@@ -35,5 +35,14 @@ public class P581UnsortedSubArrayTest {
     public void testMore() {
         assertEquals(2, instance.findUnsortedSubarray(new int[] {2, 1, 5, 6, 7, 8, 9}));
         assertEquals(5, instance.findUnsortedSubarray(new int[] {1, 2, 8, 3, 5, 10, 9, 30, 40}));
+        assertEquals(5, instance.findUnsortedSubarray(new int[] {5, 4, 3, 2, 1}));
+    }
+
+    @Test
+    public void testCase119() {
+        assertEquals(4, instance.findUnsortedSubarray(new int[] {1, 3, 2, 2, 2}));
+        assertEquals(5, instance.findUnsortedSubarray(new int[] {2, 2, 2, 3, 1}));
+        assertEquals(2, instance.findUnsortedSubarray(new int[] {3, 3, 3, 5, 4}));
+        assertEquals(5, instance.findUnsortedSubarray(new int[] {3, 3, 3, 5, 1}));
     }
 }
