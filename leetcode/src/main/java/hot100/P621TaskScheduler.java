@@ -41,10 +41,17 @@ public class P621TaskScheduler {
                 break;
             }
             if (spaces > 0) {
+                if (k == pk) {
+                    duration++;
+                    k--;
+                    m--;
+                }
                 int nk = k - (pk - 1);
                 spaces -= (pk - 1);
                 m -= (pk - 1);
-                heap.add(nk);
+                if (nk > 0) {
+                    heap.add(nk);
+                }
             } else {
                 pk = k;
                 spaces = (k - 1) * n;
