@@ -30,4 +30,9 @@ public class P621TaskSchedulerTest {
     public void testCase17() {
         assertEquals(10, scheduler.leastInterval(new char[] {'A','B','C','D','E','A','B','C','D','E'}, 4));
     }
+
+    @Test
+    public void testCase19() {
+        assertEquals(12, scheduler.leastInterval(new char[] {'A','A','A','B','B','B', 'C','C','C', 'D', 'D', 'E'}, 2));
+    }
 }

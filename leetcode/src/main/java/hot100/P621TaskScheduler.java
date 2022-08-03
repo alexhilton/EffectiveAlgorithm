@@ -37,9 +37,9 @@ public class P621TaskScheduler {
                 } else {
                     k = counts[i];
                     spaces = (k - 1) * n;
+                    pk = k;
                 }
                 duration += (k - 1) * n + k;
-                pk = k;
                 m -= k;
             }
         }
