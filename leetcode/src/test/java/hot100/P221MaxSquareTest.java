@@ -105,4 +105,17 @@ public class P221MaxSquareTest {
         };
         assertEquals(9, instance.maximalSquare(data));
     }
+
+    @Test
+    public void testCase76() {
+        char[][] data = {
+                {'1','1','1','0','0'},
+                {'1','1','1','0','0'},
+                {'1','1','1','1','1'},
+                {'0','1','1','1','1'},
+                {'0','1','1','1','1'},
+                {'0','1','1','1','1'}
+        };
+        assertEquals(16, instance.maximalSquare(data));
+    }
 }

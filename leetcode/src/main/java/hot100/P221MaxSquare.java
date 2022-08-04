@@ -13,11 +13,11 @@ public class P221MaxSquare {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == '1') {
-                    dump("Before calc ", matrix);
+//                    dump("Before calc ", matrix);
                     int len = calcArea(matrix, i, j);
                     maxArea = Math.max(len * len, maxArea);
-                    dump("After  calc ", matrix);
-                    if (len > Math.min(m, n) / 2) {
+//                    dump("After  calc ", matrix);
+                    if (len > (Math.min(m, n) / 2 + 1)) {
                         return maxArea;
                     }
                 }
