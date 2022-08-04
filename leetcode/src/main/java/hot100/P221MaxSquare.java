@@ -13,10 +13,13 @@ public class P221MaxSquare {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (matrix[i][j] == '1') {
-                    System.out.println("\n-----\nBefore calc " + Arrays.deepToString(matrix));
-                    int area = calcArea(matrix, i, j);
-                    maxArea = Math.max(area, maxArea);
-                    System.out.println("After  calc " + Arrays.deepToString(matrix));
+                    dump("Before calc ", matrix);
+                    int len = calcArea(matrix, i, j);
+                    maxArea = Math.max(len * len, maxArea);
+                    dump("After  calc ", matrix);
+                    if (len > Math.min(m, n) / 2) {
+                        return maxArea;
+                    }
                 }
             }
         }
@@ -47,13 +50,16 @@ public class P221MaxSquare {
                 break;
             }
         }
+        System.out.println(" [" + i + ", " + j + "] -> len " + len);
+        return len;
+    }
 
-        int area = len * len;
-        for (int x = i; x < i + len - 1; x++) {
-            for (int y = j; y < j + len - 1; y++) {
-                matrix[x][y] = '2';
-            }
+    private void dump(String msg, char[][] matrix) {
+        System.out.println("\n-------" + msg + "---------");
+        System.out.println("[");
+        for (char[] chs : matrix) {
+            System.out.println("\t" + Arrays.toString(chs) + ",");
         }
-        return area;
+        System.out.println("]\n");
     }
 }
