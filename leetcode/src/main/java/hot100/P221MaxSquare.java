@@ -25,31 +25,32 @@ public class P221MaxSquare {
     }
 
     private int calcArea(char[][] matrix, int i, int j) {
-        int maxLen = Math.min(m - i, n - j);
-        int x = i;
-        int y = j;
-        boolean allOne = true;
-        for (x = i; x < i + maxLen; x++) {
-            for (y = j; y < j + maxLen; y++) {
-                if (matrix[x][y] == '0') {
+        int maxLen = Math.min(m - i, n - j) - 1;
+        int len = 1;
+        for (; len <= maxLen; len++) {
+            boolean allOne = true;
+            for (int x = i; x <= i + len; x++) {
+                if (matrix[x][j + len] == '0') {
                     allOne = false;
                     break;
+                }
+            }
+            if (allOne) {
+                for (int y = j; y <= j + len; y++) {
+                    if (matrix[i + len][y] == '0') {
+                        allOne = false;
+                        break;
+                    }
                 }
             }
             if (!allOne) {
                 break;
             }
         }
-        int len = Math.min(x - i, y - j);
-        if (len == 0) {
-            if (x - i != 0 || y != j) {
-                len = 1;
-            }
-        }
-        System.out.println("i -> " +i + ", j " + j + ", x " +x+", y " + y + ", len " + len);
+
         int area = len * len;
-        for (x = i; x < i + len; x++) {
-            for (y = j; y < j + len; y++) {
+        for (int x = i; x < i + len - 1; x++) {
+            for (int y = j; y < j + len - 1; y++) {
                 matrix[x][y] = '2';
             }
         }
