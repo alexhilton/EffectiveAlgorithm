@@ -1,7 +1,5 @@
 package hot100;
 
-import java.util.Arrays;
-
 public class P581UnsortedSubArray {
     public int findUnsortedSubarray(int[] nums) {
         int n = nums.length;
@@ -38,14 +36,10 @@ public class P581UnsortedSubArray {
                 max = nums[i];
             }
         }
-        int i = left - 1;
-        while (i >= 0 && nums[i] > min) {
-            i--;
+        while (left > 0 && nums[left - 1] > min) {
             left--;
         }
-        int j = right + 1;
-        while (j <= n - 1 && nums[j] < max) {
-            j++;
+        while (right < n - 1 && nums[right + 1] < max) {
             right++;
         }
         return right - left + 1;
