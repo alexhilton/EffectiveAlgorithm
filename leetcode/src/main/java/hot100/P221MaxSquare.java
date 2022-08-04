@@ -50,7 +50,7 @@ public class P221MaxSquare {
                 break;
             }
         }
-        System.out.println(" [" + i + ", " + j + "] -> len " + len);
+//        System.out.println(" [" + i + ", " + j + "] -> len " + len);
         return len;
     }
 
