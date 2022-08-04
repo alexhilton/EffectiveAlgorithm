@@ -36,4 +36,9 @@ public class P221MaxSquareTest {
     public void testCase63() {
         assertEquals(1, instance.maximalSquare(new char[][] {{'1','0'},{'0','0'}}));
     }
+
+    @Test
+    public void testCase65() {
+        assertEquals(16, instance.maximalSquare(new char[][] {{'1','1','1','1','0'},{'1','1','1','1','0'},{'1','1','1','1','1'},{'1','1','1','1','1'},{'0','0','1','1','1'}}));
+    }
 }
