@@ -16,10 +16,8 @@ public class P079WordSearch {
         final char head = word.charAt(0);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] != mark) {
-                    if (dfs(board, i, j, word, 0)) {
-                        return true;
-                    }
+                if (dfs(board, i, j, word, 0)) {
+                    return true;
                 }
             }
         }
@@ -35,9 +33,9 @@ public class P079WordSearch {
             return false;
         }
         if (board[i][j] != word.charAt(start)) {
-            // board[i][j] = mark;
             return false;
         }
+        char oldChar = board[i][j];
         board[i][j] = mark;
         boolean res = false;
         for (int[] d : DIRS) {
@@ -48,7 +46,7 @@ public class P079WordSearch {
                 res = true;
             }
         }
-
+        board[i][j] = oldChar;
         return res;
     }
 }
