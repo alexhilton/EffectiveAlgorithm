@@ -24,4 +24,9 @@ public class P640SolveEquationTest {
     public void testBasics() {
         assertEquals("No solution", instance.solveEquation("3=4"));
     }
+
+    @Test
+    public void testCase36() {
+        assertEquals("x=1", instance.solveEquation("-x=-1"));
+    }
 }
