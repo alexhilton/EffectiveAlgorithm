@@ -29,4 +29,9 @@ public class P640SolveEquationTest {
     public void testCase36() {
         assertEquals("x=1", instance.solveEquation("-x=-1"));
     }
+
+    @Test
+    public void testCase53() {
+        assertEquals("x=-1", instance.solveEquation("2x+3x-6x=x+2"));
+    }
 }

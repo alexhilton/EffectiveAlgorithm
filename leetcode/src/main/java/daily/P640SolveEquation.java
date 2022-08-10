@@ -13,12 +13,13 @@ public class P640SolveEquation {
             final char ch = equation.charAt(i);
             if (ch == '=') {
                 sign = -1;
+                op = '+';
                 i++;
             } else if (ch == '+' || ch == '-') {
                 op = ch;
                 i++;
             } else if (ch == 'x') {
-                a += sign;
+                a = operate(a, op, sign);
                 i++;
             } else {
                 // must be digit
