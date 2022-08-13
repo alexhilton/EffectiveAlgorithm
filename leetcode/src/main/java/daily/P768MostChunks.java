@@ -1,38 +1,41 @@
 package daily;
 
-import java.util.Stack;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class P768MostChunks {
     public int maxChunksToSorted(int[] arr) {
-        Stack<Integer> stack = new Stack<>();
-        int max = arr[0];
-        stack.push(arr[0]);
-        int count = 0;
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] <= stack.peek() || arr[i] < max) {
-                stack.push(arr[i]);
+        final int n = arr.length;
+        int[] sorted = Arrays.copyOf(arr, n);
+        Arrays.sort(sorted);
+        Map<Integer, Integer> map = new HashMap<>();
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            int a = arr[i];
+            int b = sorted[i];
+            if (a == b && map.isEmpty()) {
+                result++;
+                continue;
+            }
+            int count = map.getOrDefault(a, 0) + 1;
+            if (count == 0) {
+                map.remove(a);
             } else {
-                count += clearStack(stack);
-                stack.push(arr[i]);
-                max = arr[i];
+                map.put(a, count);
             }
-        }
-        if (!stack.isEmpty()) {
-            count += clearStack(stack);
-        }
-        return count;
-    }
 
-    private int clearStack(Stack<Integer> stack) {
-        int top = stack.pop();
-        int count = 1;
-        while (!stack.isEmpty()) {
-            if (top != stack.pop()) {
-                stack.clear();
-                return 1;
+            count = map.getOrDefault(b, 0) - 1;
+            if (count == 0) {
+                map.remove(b);
+            } else {
+                map.put(b, count);
             }
-            count++;
+            if (map.isEmpty()) {
+                result++;
+            }
         }
-        return count;
+
+        return result;
     }
 }
