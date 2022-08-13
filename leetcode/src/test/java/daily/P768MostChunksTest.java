@@ -24,5 +24,15 @@ public class P768MostChunksTest {
         assertEquals(5, instance.maxChunksToSorted(new int[] {1, 2, 3, 4, 5}));
         assertEquals(1, instance.maxChunksToSorted(new int[] {1}));
         assertEquals(4, instance.maxChunksToSorted(new int[] {1, 1, 1, 1}));
+        assertEquals(4, instance.maxChunksToSorted(new int[] {2, 1, 3, 4, 5}));
+    }
+
+    @Test
+    public void testMore() {
+        assertEquals(1, instance.maxChunksToSorted(new int[] {4, 1, 3}));
+        assertEquals(1, instance.maxChunksToSorted(new int[] {4, 1, 2, 3}));
+        assertEquals(2, instance.maxChunksToSorted(new int[] {4, 1, 2, 3, 9, 9, 6}));
+        assertEquals(1, instance.maxChunksToSorted(new int[] {4, 1, 2, 3, 3, 3}));
+        assertEquals(4, instance.maxChunksToSorted(new int[] {4, 1, 2, 3, 3, 3, 4, 4, 4}));
     }
 }
