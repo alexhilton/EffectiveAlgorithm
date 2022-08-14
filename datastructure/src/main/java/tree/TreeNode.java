@@ -1,7 +1,8 @@
 package tree;
 
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TreeNode {
@@ -25,25 +26,21 @@ public class TreeNode {
         if (nums == null || nums.length == 0) {
             return null;
         }
-        TreeNode root = new TreeNode(nums[0]);
-        TreeNode currRoot = root;
-        for (int i = 1; i < nums.length; i += 2) {
-            TreeNode left = nums[i] == null ? null : new TreeNode(nums[i]);
-            currRoot.left = left;
-            TreeNode right = null;
-            if (i + 1 < nums.length) {
-                right = nums[i + 1] == null ? null : new TreeNode(nums[i + 1]);
-            }
-            if (left != null) {
-                currRoot = currRoot.left;
-            }
-            if (right != null) {
-                currRoot.right = right;
-                currRoot = currRoot.right;
+        List<TreeNode> nodes = new ArrayList<>(nums.length);
+        for (Integer a : nums) {
+            TreeNode n = a == null ? null : new TreeNode(a);
+            nodes.add(n);
+        }
+
+        for (int i = 0; i * 2 + 2 < nums.length; i++) {
+            TreeNode n = nodes.get(i);
+            if (n != null) {
+                n.left = nodes.get(2 * i + 1);
+                n.right = nodes.get(2 * i + 2);
             }
         }
 
-        return root;
+        return nodes.get(0);
     }
 
     public static Integer[] toArray(TreeNode root) {
@@ -94,7 +91,7 @@ public class TreeNode {
         if (root == null) {
             return;
         }
-        System.out.println(root.val);
+        System.out.println(root.val + ",");
 
         if (root.left != null) {
             preOrderPrint(root.left);
@@ -117,7 +114,7 @@ public class TreeNode {
             preOrderPrint(root.right);
         }
 
-        System.out.println(root.val);
+        System.out.println(root.val + ",");
 
     }
 
@@ -129,20 +126,82 @@ public class TreeNode {
             preOrderPrint(root.left);
         }
 
-        System.out.println(root.val);
+        System.out.println(root.val + ",");
 
         if (root.right != null) {
             preOrderPrint(root.right);
         }
     }
 
+    private static void visualize(Integer[] trees) {
+        System.out.println("Binary Tree: " + Arrays.toString(trees));
+        TreeNode root = fromArray(trees);
+        doVisualize(root);
+    }
+
+    private static void doVisualize(TreeNode root) {
+        if (root == null) {
+            System.out.println("Empty tree");
+            return;
+        }
+        int height = height(root);
+        int stride = (int) (Math.pow(2, height) - 1);
+        String[][] matrix = new String[height][stride];
+
+        LinkedList<TreeNode> parents = new LinkedList<>();
+        parents.add(root);
+        LinkedList<TreeNode> children = new LinkedList<>();
+        int maxWidth = 0;
+        int h = 0;
+        while (h < height) {
+            int c = 0;
+            for (TreeNode node : parents) {
+                matrix[h][c] = node == null ? "" : String.valueOf(node.val);
+                maxWidth = Math.max(maxWidth, matrix[h][c].length());
+                if (node != null) {
+                    children.add(node.left);
+                    children.add(node.right);
+                }
+                c++;
+            }
+            h++;
+            LinkedList<TreeNode> tmp = parents;
+            parents = children;
+            children = tmp;
+            children.clear();
+        }
+
+        for (int i = 0; i < height; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < stride; j++) {
+                String payload = matrix[i][j] == null ? "" : matrix[i][j];
+                int padding = maxWidth - payload.length();
+                int rear = padding - padding / 2;
+                for (int k = 0; k < rear; k++) {
+                    sb.append(" ");
+                }
+                sb.append(payload);
+                for (int k = 0; k < rear + 1; k++) {
+                    sb.append(" ");
+                }
+            }
+            System.out.println(sb);
+        }
+    }
+
+    private static int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(height(root.left), height(root.right)) + 1;
+    }
+
     public static void main(String[] args) {
-        TreeNode root = fromArray(new Integer[] {1, 2, 3});
-        System.out.println("Pre order: ");
-        preOrderPrint(root);
-        System.out.println("Post order: ");
-        postOrderPrint(root);
-        System.out.println("Middle order: ");
-        inOrderPrint(root);
+        visualize(null);
+        visualize(new Integer[] {null});
+        visualize(new Integer[] {1});
+        visualize(new Integer[] {1, 2, 3});
+        visualize(new Integer[] {3,9,20,null,null,15,7});
+        visualize(new Integer[] {4,1,6,0,2,5,7,null,null,null,3,null,null,null,8});
     }
 }
