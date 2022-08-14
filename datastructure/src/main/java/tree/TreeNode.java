@@ -154,7 +154,7 @@ public class TreeNode {
         int maxWidth = 0;
         int h = 0;
         while (h < height) {
-            int c = 0;
+            int c = (stride - (int) Math.pow(2, h + 1) + 1) / 2;
             for (TreeNode node : parents) {
                 matrix[h][c] = node == null ? "" : String.valueOf(node.val);
                 maxWidth = Math.max(maxWidth, matrix[h][c].length());
