@@ -136,10 +136,10 @@ public class TreeNode {
     private static void visualize(Integer[] trees) {
         System.out.println("Binary Tree: " + Arrays.toString(trees));
         TreeNode root = fromArray(trees);
-        doVisualize(root);
+        visualizeTree(root);
     }
 
-    private static void doVisualize(TreeNode root) {
+    private static void visualizeTree(TreeNode root) {
         if (root == null) {
             System.out.println("Empty tree");
             return;
