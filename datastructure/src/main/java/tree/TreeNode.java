@@ -203,5 +203,7 @@ public class TreeNode {
         visualize(new Integer[] {1, 2, 3});
         visualize(new Integer[] {3,9,20,null,null,15,7});
         visualize(new Integer[] {4,1,6,0,2,5,7,null,null,null,3,null,null,null,8});
+        visualize(new Integer[] {1,2,2,3,4,4,3});
+        visualize(new Integer[] {1,2,2,null,3,null,3});
     }
 }
