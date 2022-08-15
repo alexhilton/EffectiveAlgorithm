@@ -1,9 +1,7 @@
 package tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TreeNode {
     public int val;
@@ -133,6 +131,25 @@ public class TreeNode {
         }
     }
 
+    private static List<TreeNode> inorder(TreeNode root) {
+        List<TreeNode> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            result.add(cur);
+            cur = cur.right;
+        }
+        System.out.println("inorder [" +
+                result.stream().map(v -> String.valueOf(v.val)).collect(Collectors.joining(", ")) +
+                "]");
+        return result;
+    }
+
     private static void visualize(Integer[] trees) {
         System.out.println("Binary Tree: " + Arrays.toString(trees));
         TreeNode root = fromArray(trees);
@@ -145,24 +162,30 @@ public class TreeNode {
             return;
         }
         int height = height(root);
-        int stride = (int) (Math.pow(2, height) - 1);
+        List<TreeNode> inorderList = inorder(root);
+        int stride = inorderList.size();
         String[][] matrix = new String[height][stride];
 
         LinkedList<TreeNode> parents = new LinkedList<>();
-        parents.add(root);
         LinkedList<TreeNode> children = new LinkedList<>();
+
+        parents.add(root);
         int maxWidth = 0;
         int h = 0;
-        while (h < height) {
-            int c = (stride - (int) Math.pow(2, h + 1) + 1) / 2;
+        while (!parents.isEmpty()) {
+            for (int i = 0; i < inorderList.size(); i++) {
+                TreeNode n = inorderList.get(i);
+                if (parents.contains(n)) {
+                    matrix[h][i] = String.valueOf(n.val);
+                }
+            }
             for (TreeNode node : parents) {
-                matrix[h][c] = node == null ? "" : String.valueOf(node.val);
-                maxWidth = Math.max(maxWidth, matrix[h][c].length());
-                if (node != null) {
+                if (node.left != null) {
                     children.add(node.left);
+                }
+                if (node.right != null) {
                     children.add(node.right);
                 }
-                c++;
             }
             h++;
             LinkedList<TreeNode> tmp = parents;
