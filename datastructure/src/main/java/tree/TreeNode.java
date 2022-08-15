@@ -29,12 +29,15 @@ public class TreeNode {
             TreeNode n = a == null ? null : new TreeNode(a);
             nodes.add(n);
         }
-
-        for (int i = 0; i * 2 + 2 < nums.length; i++) {
-            TreeNode n = nodes.get(i);
-            if (n != null) {
-                n.left = nodes.get(2 * i + 1);
-                n.right = nodes.get(2 * i + 2);
+        if (nums.length == 2) {
+            nodes.get(0).left = nodes.get(1);
+        } else {
+            for (int i = 0; i * 2 + 2 < nums.length; i++) {
+                TreeNode n = nodes.get(i);
+                if (n != null) {
+                    n.left = nodes.get(2 * i + 1);
+                    n.right = nodes.get(2 * i + 2);
+                }
             }
         }
 
@@ -42,28 +45,36 @@ public class TreeNode {
     }
 
     public static Integer[] toArray(TreeNode root) {
-        return toArrayList(root).toArray(new Integer[0]);
-    }
-
-    public static List<Integer> toArrayList(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        result.add(root.val);
-        if (root.left == null && root.right == null) {
-            return result;
-        }
-        if (root.left != null) {
-            result.addAll(toArrayList(root.left));
-        } else {
-            result.add(null);
-        }
-        if (root.right != null) {
-            result.addAll(toArrayList(root.right));
+
+        List<TreeNode> parents = new ArrayList<>();
+        List<TreeNode> children = new ArrayList<>();
+        parents.add(root);
+        while (!parents.isEmpty()) {
+            for (TreeNode node : parents) {
+                result.add(node == null ? null : node.val);
+                if (node != null) {
+                    children.add(node.left);
+                    children.add(node.right);
+                }
+            }
+
+            for (int i = children.size() - 1; i >= 0; i--) {
+                TreeNode n = children.get(i);
+                if (n == null) {
+                    children.remove(i);
+                } else {
+                    break;
+                }
+            }
+
+            List<TreeNode> tmp = parents;
+            parents = children;
+            children = tmp;
+            children.clear();
         }
 
-        return result;
+        return result.toArray(Integer[]::new);
     }
 
     public static List<Integer> postOrder(TreeNode root) {
@@ -223,6 +234,7 @@ public class TreeNode {
         visualize(null);
         visualize(new Integer[] {null});
         visualize(new Integer[] {1});
+        visualize(new Integer[] {1, 2});
         visualize(new Integer[] {1, 2, 3});
         visualize(new Integer[] {3,9,20,null,null,15,7});
         visualize(new Integer[] {4,1,6,0,2,5,7,null,null,null,3,null,null,null,8});
