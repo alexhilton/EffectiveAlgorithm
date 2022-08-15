@@ -115,7 +115,7 @@ public class P641CircularDeque {
             if (rear >= front) {
                 return rear - front + 1;
             } else {
-                return capacity - front + rear;
+                return capacity - front + rear + 1;
             }
         }
 
