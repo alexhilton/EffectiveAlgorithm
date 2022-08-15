@@ -23,12 +23,8 @@ public class P641CircularDeque {
                 deque[front] = value;
                 return true;
             }
-            front--;
-            if (front < 0) {
-                front += capacity;
-            }
+            front = clamp(front - 1);
             deque[front] = value;
-            dump("insert front after ");
             return true;
         }
 
@@ -41,12 +37,8 @@ public class P641CircularDeque {
                 deque[front] = value;
                 return true;
             }
-            rear++;
-            if (rear >= capacity) {
-                rear -= capacity;
-            }
+            rear = clamp(rear + 1);
             deque[rear] = value;
-            dump("insert last after ");
             return true;
         }
 
@@ -58,12 +50,8 @@ public class P641CircularDeque {
                 front = -1;
                 rear = -1;
             } else {
-                front++;
-                if (front >= capacity) {
-                    front -= capacity;
-                }
+                front = clamp(front + 1);
             }
-            dump("delete front ");
             return true;
         }
 
@@ -75,36 +63,24 @@ public class P641CircularDeque {
                 front = -1;
                 rear = -1;
             } else {
-                rear--;
-                if (rear < 0) {
-                    rear += capacity;
-                }
+                rear = clamp(rear - 1);
             }
-            dump("delete last ");
             return true;
         }
 
         public int getFront() {
-            if (isEmpty()) {
-                return -1;
-            }
-            return deque[front];
+            return isEmpty() ? -1 : deque[front];
         }
 
         public int getRear() {
-            if (isEmpty()) {
-                return -1;
-            }
-            return deque[rear];
+            return isEmpty() ? -1 : deque[rear];
         }
 
         public boolean isEmpty() {
-            dump("isemtpy ");
             return size() == 0;
         }
 
         public boolean isFull() {
-            dump("isFull ");
             return size() == capacity;
         }
 
@@ -117,6 +93,16 @@ public class P641CircularDeque {
             } else {
                 return capacity - front + rear + 1;
             }
+        }
+
+        private int clamp(int index) {
+            if (index < 0) {
+                return index + capacity;
+            }
+            if (index >= capacity) {
+                return index - capacity;
+            }
+            return index;
         }
 
         private void dump(String msg) {
