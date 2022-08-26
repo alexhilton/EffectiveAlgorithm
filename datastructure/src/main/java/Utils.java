@@ -10,6 +10,8 @@ public class Utils {
             System.out.println(String.format("Math.pow(2, %d) = %d, 1 << %d = %d", k,
                     (int) Math.pow(2, k), k, 1 << k));
         }
+
+        System.out.println("Zero move 0 >> 1 = " + (0 >> 1));
     }
 
     public static void main(String[] args) {
