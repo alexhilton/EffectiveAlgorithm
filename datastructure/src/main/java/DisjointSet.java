@@ -2,10 +2,12 @@
 public class DisjointSet {
     private int size;
     private int[] parent;
+    private int[] rank;
 
     public DisjointSet(int size) {
         this.size = size;
         parent = new int[size];
+        rank = new int[size];
         init();
     }
 
@@ -18,7 +20,21 @@ public class DisjointSet {
     public void union(int x, int y) {
         int xRoot = find(x);
         int yRoot = find(y);
-        parent[xRoot] = yRoot;
+
+        if (xRoot == yRoot) {
+            // In the same set already, do nothing
+            return;
+        }
+
+        // Union by rank, ruled by higher rank.
+        if (rank[xRoot] < rank[yRoot]) {
+            parent[xRoot] = yRoot;
+        } else if (rank[xRoot] > rank[yRoot]) {
+            parent[yRoot] = xRoot;
+        } else {
+            parent[xRoot] = yRoot;
+            rank[yRoot]++;
+        }
     }
 
     public int find(int x) {
@@ -26,7 +42,11 @@ public class DisjointSet {
             return x;
         }
 
-        return find(parent[x]);
+        // Path compression
+        int root = find(parent[x]);
+        // Make each node point to its root
+        parent[x] = root;
+        return root;
     }
 
     public static void main(String[] args) {
