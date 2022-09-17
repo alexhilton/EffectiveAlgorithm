@@ -5,16 +5,14 @@ import java.util.Map;
 import java.util.Objects;
 
 public class P200NumberOfIslands {
-    private final static int[][] DIRS = {
-            {-1, 0}, {0, -1}, {1, 0}, {0, 1}
-    };
-
     private Map<Integer, Integer> fathers;
+    private Map<Integer, Integer> rank;
 
     public int numIslands(char[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
         fathers = new HashMap<>();
+        rank = new HashMap<>();
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -29,6 +27,7 @@ public class P200NumberOfIslands {
                     boolean unionWithTop = topX >= 0 && grid[topX][j] == '1';
                     int leftY = j - 1;
                     boolean unionWithLeft = leftY >= 0 && grid[i][leftY] == '1';
+                    System.out.println("     withLeft " + unionWithLeft + ", with top " + unionWithTop);
 
                     if (unionWithLeft && unionWithTop) {
                         union(topX * m + j, key);
@@ -38,6 +37,8 @@ public class P200NumberOfIslands {
                     } else if (unionWithTop) {
                         union(topX * m + j, key);
                     }
+
+                    System.out.println(fathers);
                 }
             }
         }
@@ -63,6 +64,15 @@ public class P200NumberOfIslands {
         if (fu == fv) {
             return;
         }
-        fathers.put(v, fu);
+        int ru = rank.getOrDefault(fu, 0);
+        int rv = rank.getOrDefault(fv, 0);
+        if (ru < rv) {
+            fathers.put(u, fv);
+        } else if (ru > rv) {
+            fathers.put(v, fu);
+        } else {
+            fathers.put(v, fu);
+            rank.put(fu, ru + 1);
+        }
     }
 }
