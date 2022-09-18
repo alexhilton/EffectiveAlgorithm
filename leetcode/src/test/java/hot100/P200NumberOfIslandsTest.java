@@ -49,7 +49,7 @@ public class P200NumberOfIslandsTest {
     
     @Test
     public void testCase35() {
-        assertEquals(1, instance.numIslands(new char[][] {
+        assertEquals(2, instance.numIslands(new char[][] {
                 {'1','1','1','1','1','0','1','1','1','1'},
                 {'1','0','1','0','1','1','1','1','1','1'},
                 {'0','1','1','1','0','1','1','1','1','1'},

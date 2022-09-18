@@ -1,9 +1,5 @@
 package hot100;
 
-import javax.lang.model.type.UnionType;
-import java.util.HashMap;
-import java.util.Map;
-
 public class P200NumberOfIslands {
     public int numIslands(char[][] grid) {
         int m = grid.length;
@@ -14,11 +10,17 @@ public class P200NumberOfIslands {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     int key = i * n + j;
-                    if (j + 1 < n && grid[i][j + 1] == '1') {
-                        dset.union(key, key + 1);
+                    if (i - 1 >= 0 && grid[i - 1][j] == '1') {
+                        dset.union(key, key - n);
                     }
                     if (i + 1 < m && grid[i + 1][j] == '1') {
                         dset.union(key, key + n);
+                    }
+                    if (j - 1 >= 0 && grid[i][j - 1] == '1') {
+                        dset.union(key, key - 1);
+                    }
+                    if (j + 1 < n && grid[i][j + 1] == '1') {
+                        dset.union(key, key + 1);
                     }
                 }
             }
@@ -44,7 +46,6 @@ public class P200NumberOfIslands {
                     if (data[i][j] == '1') {
                         int key = i * n + j;
                         fathers[key] = key;
-                        rank[key] = 0;
                         count++;
                     }
                 }
@@ -68,11 +69,11 @@ public class P200NumberOfIslands {
                 return;
             }
             if (rank[fu] < rank[fv]) {
-                fathers[u] = fv;
+                fathers[fu] = fv;
             } else if (rank[fu] > rank[fv]) {
-                fathers[v] = fu;
+                fathers[fv] = fu;
             } else {
-                fathers[v] = fu;
+                fathers[fv] = fu;
                 rank[fu]++;
             }
             count--;
