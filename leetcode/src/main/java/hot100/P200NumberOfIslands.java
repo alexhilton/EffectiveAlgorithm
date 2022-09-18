@@ -1,13 +1,10 @@
 package hot100;
 
+import javax.lang.model.type.UnionType;
 import java.util.HashMap;
 import java.util.Map;
 
 public class P200NumberOfIslands {
-    private static int[][] DIRS = {
-            {-1, 0}, {0, -1}, {1, 0}, {0, 1}
-    };
-
     public int numIslands(char[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
@@ -17,13 +14,11 @@ public class P200NumberOfIslands {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     int key = i * n + j;
-                    for (int[] d : DIRS) {
-                        int x = i + d[0];
-                        int y = j + d[1];
-                        if (x >= 0 && x < m && y >= 0 && y < n &&
-                                grid[x][y] == '1') {
-                            dset.union(key, x * n + y);
-                        }
+                    if (j + 1 < n && grid[i][j + 1] == '1') {
+                        dset.union(key, key + 1);
+                    }
+                    if (i + 1 < m && grid[i + 1][j] == '1') {
+                        dset.union(key, key + n);
                     }
                 }
             }
@@ -33,23 +28,23 @@ public class P200NumberOfIslands {
     }
 
     static class DisjointSet {
-        private Map<Integer, Integer> fathers;
-        private Map<Integer, Integer> rank;
+        private int[] fathers;
+        private int[] rank;
         private int count;
 
         public DisjointSet(char[][] data) {
             final int m = data.length;
             final int n = data[0].length;
-            fathers = new HashMap<>();
-            rank = new HashMap<>();
+            fathers = new int[m * n];
+            rank = new int[m * n];
             count = 0;
 
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (data[i][j] == '1') {
                         int key = i * n + j;
-                        fathers.put(key, key);
-                        rank.put(key, 0);
+                        fathers[key] = key;
+                        rank[key] = 0;
                         count++;
                     }
                 }
@@ -57,12 +52,12 @@ public class P200NumberOfIslands {
         }
 
         private int find(int key) {
-            int f = fathers.get(key);
+            int f = fathers[key];
             if (f == key) {
                 return f;
             }
             int ff = find(f);
-            fathers.put(key, ff);
+            fathers[key] = ff;
             return ff;
         }
 
@@ -72,15 +67,13 @@ public class P200NumberOfIslands {
             if (fu == fv) {
                 return;
             }
-            int ru = rank.getOrDefault(fu, 0);
-            int rv = rank.getOrDefault(fv, 0);
-            if (ru < rv) {
-                fathers.put(u, fv);
-            } else if (ru > rv) {
-                fathers.put(v, fu);
+            if (rank[fu] < rank[fv]) {
+                fathers[u] = fv;
+            } else if (rank[fu] > rank[fv]) {
+                fathers[v] = fu;
             } else {
-                fathers.put(v, fu);
-                rank.put(fu, ru + 1);
+                fathers[v] = fu;
+                rank[fu]++;
             }
             count--;
         }
