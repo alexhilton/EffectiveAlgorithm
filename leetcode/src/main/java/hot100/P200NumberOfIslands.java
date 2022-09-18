@@ -10,14 +10,8 @@ public class P200NumberOfIslands {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     int key = i * n + j;
-                    if (i - 1 >= 0 && grid[i - 1][j] == '1') {
-                        dset.union(key, key - n);
-                    }
                     if (i + 1 < m && grid[i + 1][j] == '1') {
                         dset.union(key, key + n);
-                    }
-                    if (j - 1 >= 0 && grid[i][j - 1] == '1') {
-                        dset.union(key, key - 1);
                     }
                     if (j + 1 < n && grid[i][j + 1] == '1') {
                         dset.union(key, key + 1);
