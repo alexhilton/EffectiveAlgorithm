@@ -2,6 +2,7 @@ package hot100;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class P200NumberOfIslands {
     public int numIslands(char[][] grid) {
@@ -29,21 +30,18 @@ public class P200NumberOfIslands {
     static class DisjointSet {
         private Map<Integer, Integer> fathers;
         private Map<Integer, Integer> rank;
-        private int count;
 
         public DisjointSet(char[][] data) {
             final int m = data.length;
             final int n = data[0].length;
             fathers = new HashMap<>();
             rank = new HashMap<>();
-            count = 0;
 
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (data[i][j] == '1') {
                         int key = i * n + j;
                         fathers.put(key, key);
-                        count++;
                     }
                 }
             }
@@ -75,11 +73,12 @@ public class P200NumberOfIslands {
                 fathers.put(fv, fu);
                 rank.put(fu, ru + 1);
             }
-            count--;
         }
 
         public int getCount() {
-            return count;
+            return (int) fathers.entrySet().stream()
+                    .filter(ent -> Objects.equals(ent.getKey(), ent.getValue()))
+                    .count();
         }
     }
 }
