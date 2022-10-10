@@ -54,6 +54,16 @@ public class BasicSegmentTree {
     }
 
     /**
+     * Add x to all items between [left, right] inclusive.
+     * @param left left index of the region.
+     * @param right right index of the region.
+     * @param x value to add.
+     */
+    public void add(int left, int right, int x) {
+        //
+    }
+
+    /**
      * Get the region sum between [left, right] inclusive.
      * @param left the left index of the region in input array, inclusive.
      * @param right the right index of the region in input array, inclusive.
@@ -176,5 +186,10 @@ public class BasicSegmentTree {
         System.out.println("10 = " + bst.pointQuery(0));
         System.out.println("15 = " + bst.pointQuery(2));
         System.out.println("14 = " + bst.pointQuery(4));
+
+        bst.pointAdd(3, 3);
+        System.out.println("15 = " + bst.pointQuery(2));
+        System.out.println("16 = " + bst.pointQuery(3));
+        System.out.println("30 = " + bst.query(3, 4));
     }
 }
