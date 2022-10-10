@@ -45,6 +45,15 @@ public class BasicSegmentTree {
         return doQuery(left, right, 0, size - 1, BASE);
     }
 
+    /**
+     * Query the item at index of the input array.
+     * @param index of the input array.
+     * @return the item at index.
+     */
+    public int pointQuery(int index) {
+        return doPointQuery(index, 0, size - 1, BASE);
+    }
+
     private void build(int[] nums, int start, int end, int index) {
         if (start == end) {
             tree[index] = nums[start];
@@ -113,6 +122,18 @@ public class BasicSegmentTree {
         return sum;
     }
 
+    private int doPointQuery(int where, int start, int end, int index) {
+        if (start == end) {
+            return tree[index];
+        }
+        int mid = start + ((end - start) >> 1);
+        if (where <= mid) {
+            return doPointQuery(where, start, mid, 2 * index);
+        } else {
+            return doPointQuery(where, mid + 1, end, 2 * index + 1);
+        }
+    }
+
     public static void main(String[] args) {
         int[] a = {10, 11, 12, 13, 14};
 
@@ -128,5 +149,9 @@ public class BasicSegmentTree {
         System.out.println("36 = " + bst.query(0, 2));
         System.out.println("39 = " + bst.query(1, 3));
         System.out.println("27 = " + bst.query(3, 4));
+
+        System.out.println("10 = " + bst.pointQuery(0));
+        System.out.println("15 = " + bst.pointQuery(2));
+        System.out.println("14 = " + bst.pointQuery(4));
     }
 }
