@@ -191,5 +191,11 @@ public class BasicSegmentTree {
         System.out.println("15 = " + bst.pointQuery(2));
         System.out.println("16 = " + bst.pointQuery(3));
         System.out.println("30 = " + bst.query(3, 4));
+
+        bst.add(2, 3, 10);
+        System.out.println("10 = " + bst.pointQuery(0));
+        System.out.println("25 = " + bst.pointQuery(2));
+        System.out.println("26 = " + bst.pointQuery(3));
+        System.out.println("60 = " + bst.query(3, 4));
     }
 }
