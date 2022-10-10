@@ -27,6 +27,15 @@ public class BasicSegmentTree {
     }
 
     /**
+     * Add x to item at index of the input array.
+     * @param index the item at index.
+     * @param x the value to add.
+     */
+    public void pointAdd(int index, int x) {
+        doPointAdd(index, x, 0, size - 1, BASE);
+    }
+
+    /**
      * Replace item at k with val.
      * @param k the index to replace in input array.
      * @param val target value to replace with.
@@ -69,16 +78,30 @@ public class BasicSegmentTree {
         tree[index] = tree[2 * index] + tree[2 * index + 1];
     }
 
-    private void doPointUpdate(int k, int val, int start, int end, int index) {
+    private void doPointAdd(int where, int x, int start, int end, int index) {
+        if (start == end) {
+            tree[index] += x;
+            return;
+        }
+        int mid = start + ((end - start) >> 1);
+        if (where <= mid) {
+            doPointAdd(where, x, start, mid, 2 * index);
+        } else {
+            doPointAdd(where, x, mid + 1, end, 2 * index + 1);
+        }
+        pushUp(index);
+    }
+
+    private void doPointUpdate(int where, int val, int start, int end, int index) {
         if (start == end) {
             tree[index] = val;
             return;
         }
         int mid = start + ((end - start) >> 1);
-        if (k <= mid) {
-            doPointUpdate(k, val, start, mid, 2 * index);
+        if (where <= mid) {
+            doPointUpdate(where, val, start, mid, 2 * index);
         } else {
-            doPointUpdate(k, val, mid + 1, end, 2 * index + 1);
+            doPointUpdate(where, val, mid + 1, end, 2 * index + 1);
         }
         pushUp(index);
     }
