@@ -36,6 +36,15 @@ public class BasicSegmentTree {
     }
 
     /**
+     * Query the item at index of the input array.
+     * @param index of the input array.
+     * @return the item at index.
+     */
+    public int pointQuery(int index) {
+        return doPointQuery(index, 0, size - 1, BASE);
+    }
+
+    /**
      * Get the region sum between [left, right] inclusive.
      * @param left the left index of the region in input array, inclusive.
      * @param right the right index of the region in input array, inclusive.
@@ -43,15 +52,6 @@ public class BasicSegmentTree {
      */
     public int query(int left, int right) {
         return doQuery(left, right, 0, size - 1, BASE);
-    }
-
-    /**
-     * Query the item at index of the input array.
-     * @param index of the input array.
-     * @return the item at index.
-     */
-    public int pointQuery(int index) {
-        return doPointQuery(index, 0, size - 1, BASE);
     }
 
     private void build(int[] nums, int start, int end, int index) {
