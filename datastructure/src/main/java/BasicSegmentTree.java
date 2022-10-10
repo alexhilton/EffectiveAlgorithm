@@ -9,6 +9,8 @@ public class BasicSegmentTree {
 
     private final int[] tree;
 
+    private final int[] lazy;
+
     /**
      * The length of input array.
      */
@@ -22,6 +24,7 @@ public class BasicSegmentTree {
         size = nums.length;
 
         tree = new int[4 * size];
+        lazy = new int[4 * size];
 
         build(nums, 0, size - 1, BASE);
     }
@@ -60,7 +63,7 @@ public class BasicSegmentTree {
      * @param x value to add.
      */
     public void add(int left, int right, int x) {
-        //
+        doAdd(left, right, x, 0, size - 1, BASE);
     }
 
     /**
@@ -94,6 +97,11 @@ public class BasicSegmentTree {
             return;
         }
         int mid = start + ((end - start) >> 1);
+
+        if (lazy[index] != 0) {
+            pushDown(start, mid, end, index);
+        }
+
         if (where <= mid) {
             doPointAdd(where, x, start, mid, 2 * index);
         } else {
@@ -108,12 +116,51 @@ public class BasicSegmentTree {
             return;
         }
         int mid = start + ((end - start) >> 1);
+
+        if (lazy[index] != 0) {
+            pushDown(start, mid, end, index);
+        }
+
         if (where <= mid) {
             doPointUpdate(where, val, start, mid, 2 * index);
         } else {
             doPointUpdate(where, val, mid + 1, end, 2 * index + 1);
         }
         pushUp(index);
+    }
+
+    private void doAdd(int left, int right, int x, int start, int end, int index) {
+        if (left <= start && end <= right) {
+            tree[index] += (end - start + 1) * x;
+            if (start != end) {
+                lazy[index] += x;
+            }
+            return;
+        }
+
+        int mid = start + ((end - start) >> 1);
+
+        if (lazy[index] != 0) {
+            pushDown(start, mid, end, index);
+        }
+
+        if (left <= mid) {
+            doAdd(left, right, x, start, mid, 2 * index);
+        }
+        if (right > mid) {
+            doAdd(left, right, x, mid + 1, end, 2 * index + 1);
+        }
+        pushUp(index);
+    }
+
+    private void pushDown(int start, int mid, int end, int index) {
+        tree[2 * index] += (mid - start + 1) * lazy[index];
+        lazy[2 * index] += lazy[index];
+
+        tree[2 * index + 1] += (end - mid) * lazy[index];
+        lazy[2 * index + 1] += lazy[index];
+
+        lazy[index] = 0;
     }
 
     /**
@@ -131,6 +178,11 @@ public class BasicSegmentTree {
         }
         int sum = 0;
         int mid = start + ((end - start) >> 1);
+
+        if (lazy[index] != 0) {
+            pushDown(start, mid, end, index);
+        }
+
         /*
          * Case #1: only need to query left half of current region.
          *         [left, right]
@@ -160,6 +212,11 @@ public class BasicSegmentTree {
             return tree[index];
         }
         int mid = start + ((end - start) >> 1);
+
+        if (lazy[index] != 0) {
+            pushDown(start, mid, end, index);
+        }
+
         if (where <= mid) {
             return doPointQuery(where, start, mid, 2 * index);
         } else {
@@ -196,6 +253,6 @@ public class BasicSegmentTree {
         System.out.println("10 = " + bst.pointQuery(0));
         System.out.println("25 = " + bst.pointQuery(2));
         System.out.println("26 = " + bst.pointQuery(3));
-        System.out.println("60 = " + bst.query(3, 4));
+        System.out.println("40 = " + bst.query(3, 4));
     }
 }
