@@ -31,8 +31,8 @@ public class BasicSegmentTree {
      * @param k the index to replace in input array.
      * @param val target value to replace with.
      */
-    public void update(int k, int val) {
-        doUpdate(k, val, 0, size - 1, BASE);
+    public void pointUpdate(int k, int val) {
+        doPointUpdate(k, val, 0, size - 1, BASE);
     }
 
     /**
@@ -69,16 +69,16 @@ public class BasicSegmentTree {
         tree[index] = tree[2 * index] + tree[2 * index + 1];
     }
 
-    private void doUpdate(int k, int val, int start, int end, int index) {
+    private void doPointUpdate(int k, int val, int start, int end, int index) {
         if (start == end) {
             tree[index] = val;
             return;
         }
         int mid = start + ((end - start) >> 1);
         if (k <= mid) {
-            doUpdate(k, val, start, mid, 2 * index);
+            doPointUpdate(k, val, start, mid, 2 * index);
         } else {
-            doUpdate(k, val, mid + 1, end, 2 * index + 1);
+            doPointUpdate(k, val, mid + 1, end, 2 * index + 1);
         }
         pushUp(index);
     }
@@ -144,7 +144,7 @@ public class BasicSegmentTree {
         System.out.println("36 = " + bst.query(1, 3));
         System.out.println("27 = " + bst.query(3, 4));
 
-        bst.update(2, 15);
+        bst.pointUpdate(2, 15);
         System.out.println("63 = " + bst.query(0, 4));
         System.out.println("36 = " + bst.query(0, 2));
         System.out.println("39 = " + bst.query(1, 3));
