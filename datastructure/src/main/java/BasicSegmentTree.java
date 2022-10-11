@@ -35,6 +35,9 @@ public class BasicSegmentTree {
      * @param x the value to add.
      */
     public void pointAdd(int index, int x) {
+        if (x == 0) {
+            return;
+        }
         doPointAdd(index, x, 0, size - 1, BASE);
     }
 
@@ -63,6 +66,9 @@ public class BasicSegmentTree {
      * @param x value to add.
      */
     public void add(int left, int right, int x) {
+        if (x == 0) {
+            return;
+        }
         doAdd(left, right, x, 0, size - 1, BASE);
     }
 
