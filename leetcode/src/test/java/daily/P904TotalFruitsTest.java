@@ -25,4 +25,9 @@ public class P904TotalFruitsTest {
     public void testCase59() {
         assertEquals(5, instance.totalFruit(new int[] {0, 1, 6, 6, 4, 4, 6}));
     }
+
+    @Test
+    public void testCase62() {
+        assertEquals(5, instance.totalFruit(new int[] {1,0,1,4,1,4,1,2,3}));
+    }
 }
