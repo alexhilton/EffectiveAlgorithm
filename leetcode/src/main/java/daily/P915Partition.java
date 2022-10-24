@@ -19,6 +19,9 @@ public class P915Partition {
                 while (!stack.isEmpty() && nums[bottom] > nums[i]) {
                     stack.pop();
                 }
+                if (stack.isEmpty()) {
+                    bottom = t;
+                }
                 stack.push(t);
             }
             System.out.println("stack " + stack);
