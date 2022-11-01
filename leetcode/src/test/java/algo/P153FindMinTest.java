@@ -33,4 +33,9 @@ public class P153FindMinTest {
         assertEquals(0, instance.findMin(new int[] {2, 0, 1}));
         assertEquals(0, instance.findMin(new int[] {1, 2, 0}));
     }
+
+    @Test
+    public void testCase84() {
+        assertEquals(1, instance.findMin(new int[] {2,3,4,5,1}));
+    }
 }

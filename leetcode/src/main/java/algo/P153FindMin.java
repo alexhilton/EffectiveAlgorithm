@@ -14,10 +14,12 @@ public class P153FindMin {
             int right = mid == nums.length - 1 ? 0 : mid + 1;
             if (nums[mid] < nums[left] && nums[mid] < nums[right]) {
                 return nums[mid];
-            } else if (nums[mid] > nums[left] && nums[mid] < nums[right]) {
-                end = mid - 1;
-            } else {
+            } else if (nums[mid] > nums[left] && nums[mid] > nums[right]) {
+                return nums[right];
+            } else if (nums[mid] > nums[left]) {
                 start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
         return -1; // should not be here.
