@@ -1,27 +1,42 @@
 package algo;
 
+import java.awt.font.NumericShaper;
+
 public class P153FindMin {
     public int findMin(int[] nums) {
         if (nums.length == 1) {
             return nums[0];
         }
 
-        int start = 0;
-        int end = nums.length - 1;
-        while (start <= end) {
-            int mid = start + ((end - start) >> 1);
-            int left = mid == 0 ? nums.length - 1 : mid - 1;
-            int right = mid == nums.length - 1 ? 0 : mid + 1;
-            if (nums[mid] < nums[left] && nums[mid] < nums[right]) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            if (mid == 0) {
+                if (nums[mid] < nums[mid + 1]) {
+                    return nums[mid];
+                } else {
+                    return nums[mid + 1];
+                }
+            } else if (mid == nums.length - 1) {
+                if (nums[mid] > nums[mid - 1]) {
+                    return nums[mid - 1];
+                } else {
+                    return nums[mid];
+                }
+            } else if (nums[mid] < nums[mid - 1] && nums[mid] < nums[mid + 1]) {
                 return nums[mid];
-            } else if (nums[mid] > nums[left] && nums[mid] > nums[right]) {
-                return nums[right];
+            } else if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) {
+                return nums[mid + 1];
+            } else if (nums[mid] > nums[left] && nums[mid] < nums[right]) {
+                return nums[left];
             } else if (nums[mid] > nums[left]) {
-                start = mid + 1;
+                left = mid + 1;
             } else {
-                end = mid - 1;
+                right = mid - 1;
             }
         }
+
         return -1; // should not be here.
     }
 }
