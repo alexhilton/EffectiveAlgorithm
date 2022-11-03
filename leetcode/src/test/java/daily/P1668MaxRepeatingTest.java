@@ -19,4 +19,9 @@ public class P1668MaxRepeatingTest {
         assertEquals(1, instance.maxRepeating( "ababc", "ba"));
         assertEquals(0, instance.maxRepeating("ababc", "ac"));
     }
+
+    @Test
+    public void testCase12() {
+        assertEquals(5, instance.maxRepeating("aaabaaaabaaabaaaabaaaabaaaabaaaaba", "aaaba"));
+    }
 }
