@@ -4,37 +4,49 @@ import java.util.Arrays;
 
 public class P1620Coordinates {
     public int[] bestCoordinate(int[][] towers, int radius) {
-        final int n = towers.length;
-        int[] signals = new int[n];
-        Arrays.sort(towers, (a, b) -> {
-            if (a[0] == b[0]) {
-                return a[1] - b[1];
-            }
-            return a[0] - b[0];
-        });
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                signals[i] += getSignal(towers[i], towers[j], radius);
+        int xmin = towers[0][0];
+        int ymin = towers[0][1];
+        int xmax = towers[0][0];
+        int ymax = towers[0][1];
+        for (int[] t : towers) {
+            xmin = Math.min(xmin, t[0]);
+            xmax = Math.max(xmax, t[0]);
+            ymin = Math.min(ymin, t[1]);
+            ymax = Math.max(ymax, t[1]);
+        }
+
+        int[] max = {0, 0, 0};
+        for (int x = xmin; x <= xmax; x++) {
+            for (int y = ymin; y <= ymax; y++) {
+                int signal = getSignal(towers, x, y, radius);
+                if (max[2] < signal) {
+                    max[0] = x;
+                    max[1] = y;
+                    max[2] = signal;
+                }
             }
         }
 
-        int max = 0;
-        for (int i = 1; i < n; i++) {
-            if (signals[max] < signals[i]) {
-                max = i;
-            }
-        }
-        if (towers[max][2] == 0) {
-            return new int[] {0, 0};
-        }
-        return new int[] {towers[max][0], towers[max][1]};
+        return new int[] {max[0], max[1]};
     }
 
-    private int getSignal(int[] a, int[] b, int radius) {
-        int d = (int) Math.floor(Math.sqrt((a[0]-b[0])*(a[0]-b[0]) + (a[1]-b[1])*(a[1]-b[1])));
-        if (b[2] == 0 || d > radius) {
+    private int getSignal(int[][] towers, int x, int y, int r) {
+        int s = 0;
+        for (int[] t : towers) {
+            s += doSignal(t, x, y, r);
+        }
+
+        return s;
+    }
+
+    private int doSignal(int[] t, int x, int y, int radius) {
+        if (t[2] == 0) {
             return 0;
         }
-        return (int) Math.floor((float) b[2] / (1.0 + d));
+        float d = (float) Math.sqrt((t[0]-x)*(t[0]-x) + (t[1]-y)*(t[1]-y));
+        if (d > radius) {
+            return 0;
+        }
+        return (int) Math.floor((float) t[2] / (1.0 + d));
     }
 }
