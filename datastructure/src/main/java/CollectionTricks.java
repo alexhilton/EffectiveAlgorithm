@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -141,11 +138,23 @@ public class CollectionTricks {
         System.out.println(Arrays.deepToString(valueArray));
     }
 
+    private static void playListOfArrays() {
+        List<int[]> list = new ArrayList<>();
+        list.add(new int[] {1, 2});
+        list.add(new int[] {3, 4});
+        list.add(new int[] {5, 6});
+
+        int[][] matrix = list.stream().toArray(int[][]::new);
+        System.out.println(Arrays.deepToString(matrix));
+    }
+
     public static void main(String[] args) {
         playWithArrays();
 
         playWithNLists();
 
         playWithMap();
+
+        playListOfArrays();
     }
 }
