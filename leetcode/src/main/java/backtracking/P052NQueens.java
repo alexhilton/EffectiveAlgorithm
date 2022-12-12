@@ -2,8 +2,6 @@ package backtracking;
 
 import daily.Utils;
 
-import java.awt.image.ColorModel;
-
 public class P052NQueens {
     private int n;
     private int[] queens;
