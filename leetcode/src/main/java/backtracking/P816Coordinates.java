@@ -72,7 +72,7 @@ public class P816Coordinates {
         if (f.length() == 1 && f.charAt(0) == '0') {
             return true;
         }
-        return !(f.charAt(0) == '0' || f.charAt(f.length() - 1) == '0');
+        return f.charAt(0) != '0';
     }
 
     private boolean validEnd(String e) {
