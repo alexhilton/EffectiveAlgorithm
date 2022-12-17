@@ -38,7 +38,7 @@ public class P816Coordinates {
         List<String> dottedX = new ArrayList<>();
         for (int i = 1; i < x.length(); i++) {
             String front = x.substring(0, i);
-            String end = x.substring(i, x.length());
+            String end = x.substring(i);
             if (validFront(front) && validEnd(end)) {
                 dottedX.add(front + "." + end);
             }
@@ -46,7 +46,7 @@ public class P816Coordinates {
         List<String> dottedY = new ArrayList<>();
         for (int i = 1; i < y.length(); i++) {
             String front = y.substring(0, i);
-            String end = y.substring(i, y.length());
+            String end = y.substring(i);
             if (validFront(front) && validEnd(end)) {
                 dottedY.add(front + "." + end);
             }
