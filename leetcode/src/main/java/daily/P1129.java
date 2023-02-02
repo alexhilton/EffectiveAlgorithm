@@ -10,7 +10,8 @@ public class P1129 {
 
         int[] redAnswer = bfs(n, redGraph, blueGraph, 0);
         int[] blueAnswer = bfs(n, redGraph, blueGraph, 1);
-
+        System.out.println("read-> " + Arrays.toString(redAnswer));
+        System.out.println("blue -> " + Arrays.toString(blueAnswer));
         return IntStream.range(0, n).map(i -> {
             if (redAnswer[i] >= 0 && blueAnswer[i] >= 0) {
                 return Math.min(redAnswer[i], blueAnswer[i]);
@@ -38,15 +39,18 @@ public class P1129 {
     private int[] bfs(int n, List<List<Integer>> redGraph, List<List<Integer>> blueGraph, int startColor) {
         int[] answer = new int[n];
         Arrays.fill(answer, -1);
-        boolean[] visited = new boolean[n];
+        boolean[] redVisited = new boolean[n];
+        boolean[] blueVisited = new boolean[n];
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(0);
         answer[0] = 0;
-        visited[0] = true;
+        redVisited[0] = true;
+        blueVisited[0] = true;
         int color = startColor;
         while (!queue.isEmpty()) {
             int v = queue.poll();
             List<List<Integer>> graph = color == 0 ? redGraph : blueGraph;
+            boolean[] visited = color == 0 ? redVisited : blueVisited;
             for (int nb : graph.get(v)) {
                 if (!visited[nb] && v != nb) {
                     queue.offer(nb);
