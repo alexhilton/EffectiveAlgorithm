@@ -4,62 +4,55 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class P1129 {
+    private static final int RED = 0;
+    private static final int BLUE = 1;
+
     public int[] shortestAlternatingPaths(int n, int[][] redEdges, int[][] blueEdges) {
-        List<List<Integer>> redGraph = buildGraph(n, redEdges);
-        List<List<Integer>> blueGraph = buildGraph(n, blueEdges);
-
-        int[] redAnswer = bfs(n, redGraph, blueGraph, 0);
-        int[] blueAnswer = bfs(n, redGraph, blueGraph, 1);
-        System.out.println("read-> " + Arrays.toString(redAnswer));
-        System.out.println("blue -> " + Arrays.toString(blueAnswer));
-        return IntStream.range(0, n).map(i -> {
-            if (redAnswer[i] >= 0 && blueAnswer[i] >= 0) {
-                return Math.min(redAnswer[i], blueAnswer[i]);
-            } else if (redAnswer[i] == -1) {
-                return blueAnswer[i];
-            } else {
-                return redAnswer[i];
-            }
-        }).toArray();
-    }
-
-    private List<List<Integer>> buildGraph(int n, int[][] edges) {
-        List<List<Integer>> graph = new ArrayList<>(n);
+        // Step 1: build graph
+        List<Integer>[][] graph = new List[2][n];
         for (int i = 0; i < n; i++) {
-            graph.add(new ArrayList<>());
+            graph[RED][i] = new ArrayList<>();
+        }
+        for (int i = 0; i < n; i++) {
+            graph[BLUE][i] = new ArrayList<>();
         }
 
-        for (int[] e : edges) {
-            graph.get(e[0]).add(e[1]);
+        for (int[] e : redEdges) {
+            graph[RED][e[0]].add(e[1]);
+        }
+        for (int[] e : blueEdges) {
+            graph[BLUE][e[0]].add(e[1]);
         }
 
-        return graph;
-    }
+        int[][] path = new int[2][n];
+        Arrays.fill(path[RED], Integer.MAX_VALUE);
+        Arrays.fill(path[BLUE], Integer.MAX_VALUE);
+        path[RED][0] = 0;
+        path[BLUE][0] = 0;
 
-    private int[] bfs(int n, List<List<Integer>> redGraph, List<List<Integer>> blueGraph, int startColor) {
-        int[] answer = new int[n];
-        Arrays.fill(answer, -1);
-        boolean[] redVisited = new boolean[n];
-        boolean[] blueVisited = new boolean[n];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(0);
-        answer[0] = 0;
-        redVisited[0] = true;
-        blueVisited[0] = true;
-        int color = startColor;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(new int[] {0, RED});
+        queue.offer(new int[] {0, BLUE});
         while (!queue.isEmpty()) {
-            int v = queue.poll();
-            List<List<Integer>> graph = color == 0 ? redGraph : blueGraph;
-            boolean[] visited = color == 0 ? redVisited : blueVisited;
-            for (int nb : graph.get(v)) {
-                if (!visited[nb] && v != nb) {
-                    queue.offer(nb);
-                    answer[nb] = answer[v] + 1;
-                    visited[nb] = true;
-                    color = 1 - color;
+            int[] p = queue.poll();
+            // current vertex X
+            int vertex = p[0];
+            // the edge color ends with X
+            int color = p[1];
+            // only to find different color edges next vertices
+            for (int nv : graph[1 - color][vertex]) {
+                if (path[1 - color][nv] != Integer.MAX_VALUE) {
+                    // visited already
+                    continue;
                 }
+                path[1 - color][nv] = path[color][vertex] + 1;
+                queue.offer(new int[] {nv, 1 - color});
             }
         }
-        return answer;
+        return IntStream.range(0, n)
+                .map(i -> {
+                    int dist = Math.min(path[RED][i], path[BLUE][i]);
+                    return dist == Integer.MAX_VALUE ? -1 : dist;
+                }).toArray();
     }
 }
