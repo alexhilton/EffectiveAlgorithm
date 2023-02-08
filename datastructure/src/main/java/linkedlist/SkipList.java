@@ -7,9 +7,9 @@ public class SkipList {
     private static final int INF = 1000;
     private static final int MAX_LEVEL = 32;
     private static final double P_FACTOR = 0.25;
-    private Node head;
+    private final Node head;
     private int level;
-    private Random random;
+    private final Random random;
 
     public SkipList() {
         head = new Node(-INF, MAX_LEVEL);
