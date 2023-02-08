@@ -141,7 +141,7 @@ public class SkipList {
         }
         System.out.println("Delete some.");
         for (int i = 0; i < 3; i++) {
-            int target = values[rand.nextInt(n) % values.length];
+            int target = values[i * 2];
             System.out.println("Deleting (true) " + target + " -> " + sl.delete(target));
         }
         int target = rand.nextInt(n);
