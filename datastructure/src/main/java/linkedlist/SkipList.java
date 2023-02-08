@@ -92,19 +92,21 @@ public class SkipList {
 
     public void dump() {
         for (int i = level - 1; i >= 0; i--) {
-            System.out.print(String.format("L #%3d [ ", i));
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("L #%3d [ ", i));
             Node curr = head;
             Node bottomCurr = head;
             while (bottomCurr != null) {
                 if (curr != null && curr.value == bottomCurr.value) {
-                    System.out.print(String.format("%5d -> ", curr.value));
+                    sb.append(String.format("%5d -> ", curr.value));
                     curr = curr.next[i];
                 } else {
-                    System.out.print("         ");
+                    sb.append("         ");
                 }
                 bottomCurr = bottomCurr.next[0];
             }
-            System.out.println(" null ]");
+            sb.append(" null ]");
+            System.out.println(sb);
         }
     }
 
