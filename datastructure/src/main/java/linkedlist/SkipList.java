@@ -98,7 +98,11 @@ public class SkipList {
             Node bottomCurr = head;
             while (bottomCurr != null) {
                 if (curr != null && curr.value == bottomCurr.value) {
-                    sb.append(String.format("%5d -> ", curr.value));
+                    if (curr == head) {
+                        sb.append("-Inf -> ");
+                    } else {
+                        sb.append(String.format("%5d -> ", curr.value));
+                    }
                     curr = curr.next[i];
                 } else {
                     sb.append("         ");
@@ -124,25 +128,29 @@ public class SkipList {
         SkipList sl = new SkipList();
         int n = 100;
         Random rand = new Random();
-        int[] values = new int[5];
-        for (int i = 0; i < 5; i++) {
+        int[] values = new int[7];
+        for (int i = 0; i < values.length; i++) {
             values[i] = rand.nextInt(n);
             sl.insert(values[i]);
         }
         System.out.println("After insertion.");
         sl.dump();
-        for (int i = 0; i < 5; i++) {
-            int target = rand.nextInt(n);
-            System.out.println("Searching " + target + " -> " + sl.search(target));
+        for (int i = 0; i < 3; i++) {
+            int target = values[i * 2];
+            System.out.println("Searching (true) " + target + " -> " + sl.search(target));
         }
         System.out.println("Delete some.");
-        for (int i = 0; i < 4; i++) {
-            int target = rand.nextInt(n);
-            System.out.println("Deleting " + target + " -> " + sl.delete(target));
+        for (int i = 0; i < 3; i++) {
+            int target = values[rand.nextInt(n) % values.length];
+            System.out.println("Deleting (true) " + target + " -> " + sl.delete(target));
         }
+        int target = rand.nextInt(n);
+        System.out.println("Deleting " + target + " -> " + sl.delete(target));
+        target = rand.nextInt(n);
+        System.out.println("Deleting " + target + " -> " + sl.delete(target));
         sl.dump();
         System.out.println("Insert some more.");
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             sl.insert(rand.nextInt(n));
         }
         sl.dump();
