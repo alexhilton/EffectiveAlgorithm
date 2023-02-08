@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class SkipList {
-    private static final int INF = -1000;
+    private static final int INF = 1000;
     private static final int MAX_LEVEL = 32;
     private static final double P_FACTOR = 0.25;
     private Node head;
@@ -12,7 +12,7 @@ public class SkipList {
     private Random random;
 
     public SkipList() {
-        head = new Node(INF, MAX_LEVEL);
+        head = new Node(-INF, MAX_LEVEL);
         level = 0;
         random = new Random();
     }
@@ -110,9 +110,9 @@ public class SkipList {
         }
     }
 
-    private static class Node {
-        int value;
-        Node[] next;
+    private static final class Node {
+        final int value;
+        final Node[] next;
 
         Node(int value, int level) {
             this.value = value;
