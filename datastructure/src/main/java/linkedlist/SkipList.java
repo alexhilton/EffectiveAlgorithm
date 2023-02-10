@@ -52,11 +52,11 @@ public class SkipList {
             updates[i] = curr;
         }
 
-        int lv = randomLevel();
-        level = Math.max(level, lv);
-        Node newNode = new Node(value, lv);
+        final int nodeLevel = randomLevel();
+        level = Math.max(level, nodeLevel);
+        Node newNode = new Node(value, nodeLevel);
 
-        for (int i = 0; i < lv; i++) {
+        for (int i = 0; i < nodeLevel; i++) {
             newNode.next[i] = updates[i].next[i];
             updates[i].next[i] = newNode;
         }
