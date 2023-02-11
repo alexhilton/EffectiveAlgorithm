@@ -19,6 +19,7 @@ public class SkipListTest {
     @Test
     public void testBasics() {
         assertFalse(instance.search(10), "Empty list not searchable.");
+        assertFalse(instance.delete(20), "Cannot delete from empty list.");
         int n = 100;
         Random rand = new Random();
         int[] values = new int[7];

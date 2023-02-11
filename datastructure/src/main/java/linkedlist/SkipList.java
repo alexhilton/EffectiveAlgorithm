@@ -1,6 +1,5 @@
 package linkedlist;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class SkipList {
@@ -26,12 +25,11 @@ public class SkipList {
     }
 
     public boolean search(int target) {
-        Node curr = head;
-        for (int i = level - 1; i >= 0; i--) {
-            while (curr.next[i] != null && curr.next[i].value < target) {
-                curr = curr.next[i];
-            }
+        Node[] updates = doFind(target);
+        if (updates.length == 0) {
+            return false;
         }
+        Node curr = updates[0];
 
         if (curr.next[0] != null && curr.next[0].value == target) {
             return true;
@@ -41,8 +39,30 @@ public class SkipList {
     }
 
     public void insert(int value) {
-        Node[] updates = new Node[MAX_LEVEL];
-        Arrays.fill(updates, head);
+        Node[] updates = doFind(value);
+
+        final int nodeLevel = randomLevel();
+        Node newNode = new Node(value, nodeLevel);
+
+        if (nodeLevel <= level) {
+            for (int i = 0; i < nodeLevel; i++) {
+                newNode.next[i] = updates[i].next[i];
+                updates[i].next[i] = newNode;
+            }
+        } else {
+            for (int i = nodeLevel - 1; i >= level; i--) {
+                head.next[i] = newNode;
+            }
+            for (int i = level - 1; i >= 0; i--) {
+                newNode.next[i] = updates[i].next[i];
+                updates[i].next[i] = newNode;
+            }
+        }
+        level = Math.max(level, nodeLevel);
+    }
+
+    private Node[] doFind(int value) {
+        Node[] updates = new Node[level];
 
         Node curr = head;
         for (int i = level - 1; i >= 0; i--) {
@@ -51,28 +71,16 @@ public class SkipList {
             }
             updates[i] = curr;
         }
-
-        final int nodeLevel = randomLevel();
-        level = Math.max(level, nodeLevel);
-        Node newNode = new Node(value, nodeLevel);
-
-        for (int i = 0; i < nodeLevel; i++) {
-            newNode.next[i] = updates[i].next[i];
-            updates[i].next[i] = newNode;
-        }
+        return updates;
     }
 
     public boolean delete(int target) {
-        Node[] updates = new Node[level];
-
-        Node curr = head;
-        for (int i = level - 1; i >= 0; i--) {
-            while (curr.next[i] != null && curr.next[i].value < target) {
-                curr = curr.next[i];
-            }
-            updates[i] = curr;
+        Node[] updates = doFind(target);
+        if (updates.length == 0) {
+            return false;
         }
-        curr = curr.next[0];
+
+        Node curr = updates[0].next[0];
         if (curr == null || curr.value != target) {
             // target not exist
             return false;
