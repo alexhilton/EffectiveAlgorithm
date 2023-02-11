@@ -63,7 +63,7 @@ public class SkipList {
     }
 
     public boolean delete(int target) {
-        Node[] updates = new Node[MAX_LEVEL];
+        Node[] updates = new Node[level];
 
         Node curr = head;
         for (int i = level - 1; i >= 0; i--) {
