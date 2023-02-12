@@ -26,11 +26,8 @@ public class SkipList {
 
     public boolean search(int target) {
         Node[] updates = doFind(target);
-        if (updates.length == 0) {
-            return false;
-        }
-        Node curr = updates[0];
 
+        Node curr = updates[0];
         if (curr.next[0] != null && curr.next[0].value == target) {
             return true;
         }
@@ -62,7 +59,9 @@ public class SkipList {
     }
 
     private Node[] doFind(int value) {
-        Node[] updates = new Node[level];
+        // Ensure there is a dummy head even when empty
+        Node[] updates = new Node[Math.max(1, level)];
+        updates[0] = head;
 
         Node curr = head;
         for (int i = level - 1; i >= 0; i--) {
@@ -76,9 +75,6 @@ public class SkipList {
 
     public boolean delete(int target) {
         Node[] updates = doFind(target);
-        if (updates.length == 0) {
-            return false;
-        }
 
         Node curr = updates[0].next[0];
         if (curr == null || curr.value != target) {
