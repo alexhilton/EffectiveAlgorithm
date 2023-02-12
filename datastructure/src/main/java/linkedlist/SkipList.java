@@ -41,25 +41,21 @@ public class SkipList {
         final int nodeLevel = randomLevel();
         Node newNode = new Node(value, nodeLevel);
 
-        if (nodeLevel <= level) {
-            for (int i = 0; i < nodeLevel; i++) {
-                newNode.next[i] = updates[i].next[i];
-                updates[i].next[i] = newNode;
-            }
-        } else {
-            for (int i = nodeLevel - 1; i >= level; i--) {
-                head.next[i] = newNode;
-            }
-            for (int i = level - 1; i >= 0; i--) {
-                newNode.next[i] = updates[i].next[i];
-                updates[i].next[i] = newNode;
-            }
+        final int realLevel = Math.min(nodeLevel, level);
+        for (int i = 0; i < realLevel; i++) {
+            newNode.next[i] = updates[i].next[i];
+            updates[i].next[i] = newNode;
+        }
+        // Exceeding current 'level', append to head's next
+        for (int i = level; i < nodeLevel; i++) {
+            head.next[i] = newNode;
         }
         level = Math.max(level, nodeLevel);
     }
 
     private Node[] doFind(int value) {
         // Ensure there is a dummy head even when empty
+        // so that callers do not need to check for empty anymore.
         Node[] updates = new Node[Math.max(1, level)];
         updates[0] = head;
 
