@@ -27,7 +27,7 @@ public class P042RainTrap {
                 final int h = Math.min(height[i], height[left]);
                 final int sum = preSum[i - 1] - preSum[left];
                 System.out.println("     left -> " + left + " [" + height[left] + "]");
-                System.out.println("     w " + w + ", h "+ h + " sum " + sum + ", trap " + (w*h-sum));
+                System.out.println("     w " + w + ", h "+ h + " sum " + sum + ", trap -> " + (w*h-sum));
                 trapMap[i] = Math.max(0, w * h - sum);
                 if (height[i] >= height[left]) {
                     stack.pop();
