@@ -1,33 +1,43 @@
 package hot100;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class P042RainTrap {
     public int trap(int[] height) {
         final int n = height.length;
         Stack<Integer> stack = new Stack<>();
-        int answer = 0;
+        int[] trapMap = new int[n];
+        int[] preSum = new int[n];
         int left = 0;
-        for (int i = 0; i < n; i++) {
+        stack.push(0);
+        preSum[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            preSum[i] = preSum[i - 1] + height[i];
+            System.out.println(" i " + i + ", [" + height[i] + "]");
             if (stack.isEmpty() || height[i] < height[stack.peek()]) {
                 stack.push(i);
             } else {
-                int sum = 0;
                 while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
-                    sum += height[stack.pop()];
+                    int t = stack.pop();
+                    trapMap[t] = 0;
                 }
                 if (!stack.isEmpty()) {
                     left = stack.peek();
-                } else {
-                    sum -= height[left];
                 }
                 final int w = i - left - 1;
                 final int h = Math.min(height[i], height[left]);
-                answer += w * h - sum;
+                final int sum = preSum[i - 1] - preSum[left];
+                System.out.println("w " + w + ", h "+ h + " sum " + sum + ", trap " + (w*h-sum));
+                trapMap[i] = w * h - sum;
                 stack.push(i);
             }
+            System.out.println("     left -> " + left + " [" + height[left] + "]");
+            System.out.println(" pre sum " + Arrays.toString(preSum));
+            System.out.println(" tap map " + Arrays.toString(trapMap));
+            System.out.println("stack -> " + stack);
         }
 
-        return answer;
+        return Arrays.stream(trapMap).sum();
     }
 }
