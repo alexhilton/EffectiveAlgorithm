@@ -3,7 +3,6 @@ package hot100;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class P042RainTrapTest {
@@ -23,6 +22,7 @@ public class P042RainTrapTest {
     @Test
     public void testBasics() {
         assertEquals(0, instance.trap(new int[] {0}));
+        assertEquals(0, instance.trap(new int[] {0,0}));
         assertEquals(0, instance.trap(new int[] {1}));
         assertEquals(0, instance.trap(new int[] {0, 1}));
         assertEquals(0, instance.trap(new int[] {1, 3}));
@@ -45,5 +45,24 @@ public class P042RainTrapTest {
         assertEquals(6, instance.trap(new int[] {2, 0, 0, 0, 2}));
         assertEquals(6, instance.trap(new int[] {2, 0, 0, 0, 5}));
         assertEquals(6, instance.trap(new int[] {5, 0, 0, 0, 2}));
+    }
+
+    @Test
+    public void testAdvanced() {
+        assertEquals(6, instance.trap(new int[] {1, 0, 0, 2, 0, 0, 3}));
+        assertEquals(6, instance.trap(new int[] {3, 0, 0, 2, 0, 0, 1}));
+    }
+
+    @Test
+    public void testPeak() {
+        assertEquals(9, instance.trap(new int[] {1, 0, 2, 0, 3, 0, 3, 0, 2, 0, 1}));
+    }
+
+    @Test
+    public void testValley() {
+        assertEquals(16, instance.trap(new int[] {3, 0, 2,0,1,0,2,0,3}));
+        assertEquals(9, instance.trap(new int[] {3, 0, 2,0,1,0,2,0,2}));
+        assertEquals(9, instance.trap(new int[] {2, 0, 2,0,1,0,2,0,3}));
+        assertEquals(9, instance.trap(new int[] {2, 0, 2,0,1,0,2,0,2}));
     }
 }
