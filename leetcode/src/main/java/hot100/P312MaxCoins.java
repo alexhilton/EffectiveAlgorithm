@@ -1,10 +1,12 @@
 package hot100;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class P312MaxCoins {
     public int maxCoins(int[] nums) {
         final int n = nums.length;
+        dump("input", nums, 0, n - 1);
         // all zeros first
         for (int i = 0; i < n; i++) {
             if (nums[i] == 0) {
@@ -27,7 +29,22 @@ public class P312MaxCoins {
             return nums[left];
         }
 
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> nums[a] - nums[b]);
+        while (left < right && nums[left] == 1) {
+            answer += coin(nums, left, left, right);
+            left++;
+        }
+        while (left < right && nums[right] == 1) {
+            answer += coin(nums, right, left, right);
+            right--;
+        }
+        dump("after ones ", nums, left, right);
+
+        if (left == right) {
+            answer += nums[left];
+            return answer;
+        }
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> nums[a]));
         for (int i = left + 1; i < right; i++) {
             if (nums[i] != -1) {
                 minHeap.offer(i);
@@ -64,5 +81,19 @@ public class P312MaxCoins {
         }
         nums[p] = -1;
         return a;
+    }
+
+    private void dump(String message, int[] nums, int left, int right) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(message);
+        sb.append(": [");
+        String sep = "";
+        for (int i = left; i <= right; i++) {
+            sb.append(sep);
+            sb.append(nums[i]);
+            sep = ",";
+        }
+        sb.append("]");
+        System.out.println(sb);
     }
 }
