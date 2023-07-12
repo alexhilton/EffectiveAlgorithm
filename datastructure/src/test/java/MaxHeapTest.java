@@ -38,4 +38,17 @@ public class MaxHeapTest {
         assertEquals(12, inst.poll());
         assertEquals(4, inst.heapSize());
     }
+
+    @Test
+    public void testClear() {
+        MaxHeap inst = new MaxHeap(5);
+        assertTrue(inst.isEmpty());
+        inst.offer(1);
+        inst.offer(3);
+        inst.offer(5);
+        assertFalse(inst.isFull());
+        assertEquals(3, inst.heapSize());
+        inst.clear();
+        assertTrue(inst.isEmpty(), "After clear");
+    }
 }

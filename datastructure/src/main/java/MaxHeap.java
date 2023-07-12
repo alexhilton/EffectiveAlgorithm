@@ -1,7 +1,9 @@
-import java.net.CacheRequest;
 
+/**
+ * A bound Max Heap of int type elements.
+ */
 public class MaxHeap {
-    private static final int INF = Integer.MAX_VALUE;
+    public static final int INF = Integer.MAX_VALUE;
 
     private final int capacity;
     private int size;
@@ -13,8 +15,11 @@ public class MaxHeap {
         elements = new int[capacity];
     }
 
+    /**
+     * Nothing happens if heap is full
+     */
     public void offer(int e) {
-        if (size == capacity) {
+        if (isFull()) {
             // Overflowed.
             return;
         }
@@ -33,7 +38,14 @@ public class MaxHeap {
     }
 
     public int peek() {
+        if (isEmpty()) {
+            return INF;
+        }
         return elements[0];
+    }
+
+    public void clear() {
+        size = 0;
     }
 
     public int poll() {
@@ -54,6 +66,10 @@ public class MaxHeap {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
     }
 
     private void heapify(int i) {
