@@ -12,6 +12,6 @@ public class MaxHeapTest {
         assertEquals(4, inst.peek(), "One element");
         assertFalse(inst.isEmpty(), "Peek not deleted");
         assertEquals(4, inst.poll(), "One element");
-        assertFalse(inst.isEmpty(), "After poll only element, should empty");
+        assertTrue(inst.isEmpty(), "After poll only element, should empty");
     }
 }
