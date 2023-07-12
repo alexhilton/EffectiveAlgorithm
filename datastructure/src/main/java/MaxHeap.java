@@ -24,7 +24,12 @@ public class MaxHeap {
 
         while (i != 0 && elements[parent(i)] < elements[i]) {
             swap(i, parent(i));
+            i = parent(i);
         }
+    }
+
+    public int heapSize() {
+        return size;
     }
 
     public int peek() {
