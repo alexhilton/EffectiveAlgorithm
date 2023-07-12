@@ -16,7 +16,7 @@ public class MaxHeap {
     }
 
     public int peek() {
-        return -1;
+        return elements[0];
     }
 
     public int poll() {
@@ -25,5 +25,17 @@ public class MaxHeap {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    private int parent(int i) {
+        return (i - 1) / 2;
+    }
+
+    private int left(int i) {
+        return (i << 1) + 1;
+    }
+
+    private int right(int i) {
+        return (i << 1) + 2;
     }
 }
