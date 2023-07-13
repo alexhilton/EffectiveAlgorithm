@@ -69,7 +69,7 @@ public class MaxHeap {
         }
 
         /*
-         * Root is the max value in the heap, will remove and return it to caller.
+         * Root is the max value in the heap, will be removed and returned to caller.
          * Push down the tree and select the max of left and right as the new parent.
          */
         int root = elements[0];
@@ -89,9 +89,9 @@ public class MaxHeap {
 
     /*
      * Heapify the sub-tree rooted with index i.
-     * Find the largest value of parent, left and right;
+     * Find the largest value among parent, left and right;
      * If the parent is the largest, we are done.
-     * Swap parent with the largest node, now parent is the largest;
+     * Swap parent with the largest sub-node, now parent is the largest;
      * Keep heapifying the swapped sub-tree.
      */
     private void heapify(int i) {
