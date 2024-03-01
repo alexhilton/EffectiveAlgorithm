@@ -22,7 +22,8 @@ public class BinarySearch {
     }
 
     /**
-     * Find first item which bigger than @param target.
+     * Find first item which is bigger than or equals @param target.
+     * This is equals to find last item which is less than target.
      * @param arr must be sorted in ascending order.
      * @param target
      * @return the first index bigger than target, or -1 if target is bigger than all elements.
@@ -41,6 +42,12 @@ public class BinarySearch {
         return arr[left] >= target ? left : -1;
     }
 
+    /**
+     * See {@link #firstBiggerAscV1}
+     * @param arr
+     * @param target
+     * @return
+     */
     public int firstBiggerAscV2(int[] arr, int target) {
         int n = arr.length;
         int left = 0;
