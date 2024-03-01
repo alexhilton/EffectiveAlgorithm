@@ -48,36 +48,57 @@ public class BinarySearchTest {
 
     @Test
     public void testFirstBiggerV1() {
-        doTestAscending(instance::firstBiggerAscV1);
+        doTest(instance::firstBiggerAscV1, false);
     }
     
-    private void doTestAscending(BiFunction<int[], Integer, Integer> func) {
+    private void doTest(BiFunction<int[], Integer, Integer> func, boolean desc) {
         int[] arr = {1,2,3,4,5,6,7,8,9};
+        if (desc) {
+            reverse(arr);
+        }
+        int n = arr.length - 1;
         int ans = func.apply(arr, 3);
-        assertEquals(2, ans);
+        assertEquals(desc ? n - 2 : 2, ans);
         ans = func.apply(arr, 6);
-        assertEquals(5, ans);
+        assertEquals(desc ? n - 5 : 5, ans);
 
         ans = func.apply(arr, 0);
-        assertEquals(0, ans, "All answer");
+        assertEquals(desc ? n : 0, ans, "All answer");
         ans = func.apply(arr, 10);
         assertEquals(-1, ans, "No answer");
 
         int[] arr2 = {2, 4, 4, 7, 7, 7, 10, 14, 14, 14, 29, 29, 29};
+        n = arr2.length - 1;
+        if (desc) {
+            reverse(arr2);
+        }
         ans = func.apply(arr2, 7);
-        assertEquals(3, ans);
+        assertEquals(desc ? n - 3: 3, ans);
         ans = func.apply(arr2, 10);
-        assertEquals(6, ans);
+        assertEquals(desc ? n - 6 : 6, ans);
         ans = func.apply(arr2, 29);
-        assertEquals(10, ans);
+        assertEquals(desc ? n - 10 : 10, ans);
         ans = func.apply(arr2, 0);
-        assertEquals(0, ans);
+        assertEquals(desc ? n : 0, ans);
         ans = func.apply(arr2, 100);
         assertEquals(-1, ans);
     }
 
     @Test
     public void testFirstBiggerV2() {
-        doTestAscending(instance::firstBiggerAscV2);
+        doTest(instance::firstBiggerAscV2, false);
+    }
+
+    @Test
+    public void testLastBiggerV1() {
+        doTest(instance::lastBiggerDscV1, true);
+    }
+
+    private static void reverse(int[] arr) {
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
+            int t = arr[i];
+            arr[i] = arr[j];
+            arr[j] = t;
+        }
     }
 }
