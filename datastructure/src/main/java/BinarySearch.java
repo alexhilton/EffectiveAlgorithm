@@ -1,5 +1,27 @@
 public class BinarySearch {
     /**
+     * Standard binary search.
+     * @param arr Sorted in ascending order.
+     * @param target
+     * @return the index where [index] == target, or -1.
+     */
+    public int standardAsc(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
      * Find first item which bigger than @param target.
      * @param arr must be sorted in ascending order.
      * @param target

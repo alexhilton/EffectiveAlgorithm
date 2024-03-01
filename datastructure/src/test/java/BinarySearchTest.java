@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.function.BiFunction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BinarySearchTest {
     private BinarySearch instance;
@@ -11,6 +11,39 @@ public class BinarySearchTest {
     @BeforeEach
     public void setup() {
         instance = new BinarySearch();
+    }
+
+    @Test
+    public void testStandard() {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        int ans = instance.standardAsc(arr, 2);
+        assertEquals(1, ans);
+        ans = instance.standardAsc(arr, 5);
+        assertEquals(4, ans);
+        ans = instance.standardAsc(arr, 1);
+        assertEquals(0, ans);
+        ans = instance.standardAsc(arr, 7);
+        assertEquals(6, ans);
+        ans = instance.standardAsc(arr, 0);
+        assertEquals(-1, ans);
+        ans = instance.standardAsc(arr, 8);
+        assertEquals(-1, ans);
+
+        int[] arr2 = {2, 4, 4, 7, 7, 7, 9, 14, 14, 14, 18};
+        ans = instance.standardAsc(arr2, 4);
+        assertTrue(ans >= 1 && ans <= 2);
+        ans = instance.standardAsc(arr2, 7);
+        assertTrue(ans >= 3 && ans <= 5);
+        ans = instance.standardAsc(arr2, 14);
+        assertTrue(ans >= 7 && ans <= 9);
+        ans = instance.standardAsc(arr2, 0);
+        assertEquals(-1, ans);
+        ans = instance.standardAsc(arr2, 3);
+        assertEquals(-1, ans);
+        ans = instance.standardAsc(arr2, 10);
+        assertEquals(-1, ans);
+        ans = instance.standardAsc(arr2, 20);
+        assertEquals(-1, ans);
     }
 
     @Test
