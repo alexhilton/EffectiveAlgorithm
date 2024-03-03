@@ -118,4 +118,38 @@ public class BinarySearch {
         }
         return -1;
     }
+
+    public int lastBiggerDscV2(int[] arr, int target) {
+        System.out.println("target -> " + target + ", len -> " + arr.length);
+        int left = 0;
+        int right = arr.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("arr = [");
+            for (int i = 0; i < left; i++) {
+                sb.append("  ,");
+            }
+            for (int i = left; i <= right; i++) {
+                sb.append(String.format("%2d", arr[i]));
+                sb.append(",");
+            }
+            sb.append("]");
+            System.out.println(sb);
+
+            if (arr[mid] > target) {
+                left = mid + 1;
+                System.out.println("\t[mid] less than target, go right!");
+            } else if (arr[mid] == target) {
+                left = mid;
+                System.out.println("\t[mid] less than target, go right!");
+            } else {
+                right = mid - 1;
+                System.out.println("\t[mid] bigger than target, go left!");
+            }
+        }
+        System.out.println("left/right -> " + left + ", ans -> " + (arr[left] >= target ? left : -1));
+        return arr[left] >= target ? left : -1;
+    }
 }

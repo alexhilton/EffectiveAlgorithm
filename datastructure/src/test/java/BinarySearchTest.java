@@ -101,4 +101,9 @@ public class BinarySearchTest {
             arr[j] = t;
         }
     }
+
+    @Test
+    public void testLastBiggerV2() {
+        doTest(instance::lastBiggerDscV2, true);
+    }
 }
