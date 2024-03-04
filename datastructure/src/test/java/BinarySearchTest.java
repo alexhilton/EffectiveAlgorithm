@@ -82,6 +82,20 @@ public class BinarySearchTest {
         assertEquals(desc ? n : 0, ans);
         ans = func.apply(arr2, 100);
         assertEquals(-1, ans);
+
+        int[] arr3 = {1, 10, 10};
+        n = arr3.length - 1;
+        if (desc) {
+            reverse(arr3);
+        }
+        ans = func.apply(arr3, 1);
+        assertEquals(desc ? n : 0, ans);
+        ans = func.apply(arr3, 2);
+        assertEquals(desc ? n - 1 : 1, ans);
+        ans = func.apply(arr3, 10);
+        assertEquals(desc ? n - 1 : 1, ans);
+        ans = func.apply(arr3, 30);
+        assertEquals(-1, ans);
     }
 
     @Test

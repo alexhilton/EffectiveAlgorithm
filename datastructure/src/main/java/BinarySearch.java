@@ -124,7 +124,7 @@ public class BinarySearch {
         int left = 0;
         int right = arr.length - 1;
         while (left < right) {
-            int mid = left + (right - left) / 2;
+            int mid = left + (right - left + 1) / 2;
 
             StringBuilder sb = new StringBuilder();
             sb.append("arr = [");
@@ -138,10 +138,7 @@ public class BinarySearch {
             sb.append("]");
             System.out.println(sb);
 
-            if (arr[mid] > target) {
-                left = mid + 1;
-                System.out.println("\t[mid] less than target, go right!");
-            } else if (arr[mid] == target) {
+            if (arr[mid] >= target) {
                 left = mid;
                 System.out.println("\t[mid] less than target, go right!");
             } else {
