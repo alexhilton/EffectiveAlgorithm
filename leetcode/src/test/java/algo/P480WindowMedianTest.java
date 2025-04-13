@@ -53,27 +53,30 @@ public class P480WindowMedianTest {
     public void testTimeLimit() {
         final String file = "l480.txt";
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(file);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                String stuff = line.substring(1, line.length() - 1);
-                String[] parts = stuff.split(",");
-                int[] array = new int[parts.length];
-                for (int i = 0; i < parts.length; i++) {
-                    array[i] = Integer.parseInt(parts[i]);
-                }
-                String ks = br.readLine();
-                int k = Integer.parseInt(ks);
-                String es = br.readLine();
-                stuff = es.substring(1, es.length() - 1);
-                parts = stuff.split(",");
-                double[] ans = new double[parts.length];
-                for (int i = 0; i < parts.length; i++) {
-                    ans[i] = Double.parseDouble(parts[i]);
-                }
+        try {
+            assert is != null;
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    String stuff = line.substring(1, line.length() - 1);
+                    String[] parts = stuff.split(",");
+                    int[] array = new int[parts.length];
+                    for (int i = 0; i < parts.length; i++) {
+                        array[i] = Integer.parseInt(parts[i]);
+                    }
+                    String ks = br.readLine();
+                    int k = Integer.parseInt(ks);
+                    String es = br.readLine();
+                    stuff = es.substring(1, es.length() - 1);
+                    parts = stuff.split(",");
+                    double[] ans = new double[parts.length];
+                    for (int i = 0; i < parts.length; i++) {
+                        ans[i] = Double.parseDouble(parts[i]);
+                    }
 
-                assertArrayEquals(ans, instance.medianSlidingWindow(array, k));
+                    assertArrayEquals(ans, instance.medianSlidingWindow(array, k));
+                }
             }
-        } catch (IOException e) {}
+        } catch (IOException ignored) {}
     }
 }
