@@ -9,7 +9,7 @@ public class P480WindowMedian {
         int n = nums.length;
         double[] ans = new double[n - k + 1];
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a, b));
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         Map<Integer, Integer> recycler = new HashMap<>();
         int left = 0;
         int right = 0;
@@ -31,10 +31,12 @@ public class P480WindowMedian {
         }
 
         for (int i = k - 1, j = 0; i < n; i++, j++) {
-            if (j == 307) {
+            if (true||j == 307) {
                 System.out.println("> i " + i + ", [i] " + nums[i] + ", left " + left + ", right " + right);
-                System.out.println("> maxHeap -> " + (maxHeap.isEmpty() ? maxHeap : maxHeap.peek()));
-                System.out.println("> minHeap -> " + (minHeap.isEmpty() ? minHeap : minHeap.peek()));
+                System.out.println("> maxHeap -> " + maxHeap);
+                System.out.println("> minHeap -> " + minHeap);
+//                System.out.println("> maxHeap -> " + (maxHeap.isEmpty() ? maxHeap : maxHeap.peek()));
+//                System.out.println("> minHeap -> " + (minHeap.isEmpty() ? minHeap : minHeap.peek()));
             }
             int x = nums[i];
             if (left == right) {
@@ -67,10 +69,12 @@ public class P480WindowMedian {
             }
             // System.out.println("   after insertion maxHeap -> " + maxHeap);
             // System.out.println("   after insertion minHeap -> " + minHeap);
-            if (j == 307) {
+            if (true ||j == 307) {
                 System.out.println("   after ins left " + left + ", right " + right);
-                System.out.println("   after insertion maxHeap peek -> " + maxHeap.peek());
-                System.out.println("   after insertion minHeap peek -> " + minHeap.peek());
+                System.out.println("   after insertion maxHeap peek -> " + maxHeap);
+                System.out.println("   after insertion minHeap peek -> " + minHeap);
+//                System.out.println("   after insertion maxHeap peek -> " + maxHeap.peek());
+//                System.out.println("   after insertion minHeap peek -> " + minHeap.peek());
             }
             if (k % 2 == 0) {
                 ans[j] = ((double) maxHeap.peek() + minHeap.peek()) / 2.0;
@@ -78,25 +82,37 @@ public class P480WindowMedian {
                 ans[j] = maxHeap.peek();
             }
             int y = nums[i - k + 1];
-            if (j == 307) {
-                System.out.println(" Got " + j + " ->" + ans[j] + ", y->" + y);
+            if (true||j == 307) {
+                System.out.println(" Got #" + j + " ->" + ans[j] + ", y->" + y);
             }
+            recycler.put(y, recycler.getOrDefault(y, 0) + 1);
             if (!minHeap.isEmpty() && y >= minHeap.peek()) {
                 if (y == minHeap.peek()) {
-                    minHeap.poll();
-                } else {
-                    recycler.put(y, recycler.getOrDefault(y, 0) + 1);
+                    prune(minHeap, recycler);
                 }
                 right--;
             } else if (y <= maxHeap.peek()) {
                 if (y == maxHeap.peek()) {
-                    maxHeap.poll();
-                } else {
-                    recycler.put(y, recycler.getOrDefault(y, 0) + 1);
+                    prune(maxHeap, recycler);
                 }
                 left--;
             }
         }
         return ans;
+    }
+
+    private void prune(PriorityQueue<Integer> heap, Map<Integer, Integer> map) {
+        while (!heap.isEmpty()) {
+            int head = heap.peek();
+            if (map.containsKey(head)) {
+                map.put(head, map.get(head) - 1);
+                if (map.get(head) == 0) {
+                    map.remove(head);
+                }
+                heap.poll();
+            } else {
+                break;
+            }
+        }
     }
 }

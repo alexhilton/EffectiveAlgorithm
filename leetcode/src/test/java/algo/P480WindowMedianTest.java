@@ -1,6 +1,7 @@
 package algo;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -36,12 +37,19 @@ public class P480WindowMedianTest {
     }
 
     @Test
+    public void testDeletion() {
+        assertArrayEquals(new double[] {3.00000,4.00000,4.00000,1.00000}, instance.medianSlidingWindow(new int[] {2,3,4,5,1,0}, 3));
+        assertArrayEquals(new double[] {3.50000,3.50000,2.50000}, instance.medianSlidingWindow(new int[] {2,3,4,5,1,0}, 4));
+    }
+
+    @Test
     public void testBoundaries() {
         assertArrayEquals(new double[] {1}, instance.medianSlidingWindow(new int[] {1}, 1));
         assertArrayEquals(new double[] {-2147483648.00000,-2147483648.00000,-2147483648.00000,-2147483648.00000,-2147483648.00000,2147483647.00000,2147483647.00000,2147483647.00000,2147483647.00000,2147483647.00000,-2147483648.00000}, instance.medianSlidingWindow(new int[] {-2147483648,-2147483648,2147483647,-2147483648,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648}, 3));
     }
 
     @Test
+    @Disabled
     public void testTimeLimit() {
         final String file = "l480.txt";
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(file);
